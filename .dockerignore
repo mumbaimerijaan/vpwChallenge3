@@ -1,0 +1,17 @@
+.git
+.gitignore
+node_modules
+README.md
+
+*.psd
+*.ai
+*.xcf
+
+intro/videos
+intro/images
+
+quiz/images
+
+build/images
+
+assets

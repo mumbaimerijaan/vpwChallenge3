@@ -248,3 +248,17 @@ mumbaimerijaan
 Created for the Virtual PromptWars Challenge 3 – Carbon Footprint Awareness Platform.
 
 Built using AI-assisted development, interactive storytelling, and modern web technologies to make environmental awareness engaging and accessible.
+
+---
+
+## Cloud Run Deployment
+
+```bash
+gcloud builds submit --tag gcr.io/PROJECT_ID/carbonstory
+
+gcloud run deploy carbonstory \
+  --image gcr.io/PROJECT_ID/carbonstory \
+  --platform managed \
+  --allow-unauthenticated \
+  --region asia-south1
+```
