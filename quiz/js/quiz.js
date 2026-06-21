@@ -8,6 +8,10 @@ window.QuizApp.State = {
 };
 
 window.QuizApp.Data = {
+    /**
+     * Fetches questions from JSON, shuffles them, and caches assets.
+     * @returns {Promise<boolean>} Resolves to true if successful, false otherwise.
+     */
     loadQuestions: async function() {
         try {
             const response = await fetch('./data/questions.json');
@@ -66,14 +70,27 @@ window.QuizApp.Data = {
         }
     },
     
+    /**
+     * Returns the currently active question object.
+     * @returns {Object} The current question.
+     */
     getCurrentQuestion: function() {
         return window.QuizApp.State.questions[window.QuizApp.State.currentIndex];
     },
     
+    /**
+     * Gets the total number of questions in the current quiz set.
+     * @returns {number} Length of questions array.
+     */
     getTotalQuestions: function() {
         return window.QuizApp.State.questions.length;
     },
     
+    /**
+     * Validates the selected answer against the correct answer.
+     * @param {string} selected - The user's selection (e.g., 'A' or 'B').
+     * @returns {boolean} True if correct.
+     */
     checkAnswer: function(selected) {
         const q = this.getCurrentQuestion();
         const isCorrect = (selected === q.correct);
@@ -83,12 +100,19 @@ window.QuizApp.Data = {
         return isCorrect;
     },
     
+    /**
+     * Advances the internal index to the next question.
+     * @returns {Object} The next question object.
+     */
     nextQuestion: function() {
         window.QuizApp.State.currentIndex++;
         window.QuizApp.State.selectedOption = null;
         return this.getCurrentQuestion();
     },
     
+    /**
+     * Resets the entire quiz state for a fresh start.
+     */
     reset: function() {
         window.QuizApp.State.currentIndex = 0;
         window.QuizApp.State.score = 0;

@@ -4,9 +4,18 @@ window.StoryApp = {
     selections: {},
     baseImpact: 0.5,
 
+    /**
+     * HistoryManager: Handles local storage of user assessment data.
+     */
     HistoryManager: {
         STORAGE_KEY: 'carbonStoryHistory',
         
+        /**
+         * Saves a completed assessment to local storage.
+         * @param {number} totalImpact - The calculated total score.
+         * @param {Object} breakdown - Category by category score breakdown.
+         * @returns {Array} - The updated history array.
+         */
         saveAssessment: function(totalImpact, breakdown) {
             const history = this.getHistory();
             const assessment = {
@@ -20,6 +29,10 @@ window.StoryApp = {
             return history;
         },
         
+        /**
+         * Retrieves assessment history from local storage.
+         * @returns {Array} - List of historical assessment objects.
+         */
         getHistory: function() {
             try {
                 const data = localStorage.getItem(this.STORAGE_KEY);
@@ -39,6 +52,9 @@ window.StoryApp = {
         }
     },
 
+    /**
+     * Initializes the Story application, fetches data, and renders the first step.
+     */
     init: async function() {
         try {
             const res = await fetch('./data/carbon-story.json');
@@ -54,6 +70,9 @@ window.StoryApp = {
         }
     },
 
+    /**
+     * Renders the visual progress nodes at the top of the quiz.
+     */
     renderProgressNodes: function() {
         const container = document.getElementById('progress-nodes');
         container.innerHTML = '';
@@ -247,6 +266,9 @@ window.StoryApp = {
         });
     },
 
+    /**
+     * Calculates final score, generates Carbon Action Plan, and renders the results dashboard.
+     */
     showResults: function() {
         // Apply result specific styles
         $('#hero-bg').css('background-image', `url("${window.ASSETS.images.heroResult}")`).css('background-color', 'var(--bg-color)');
@@ -276,11 +298,18 @@ window.StoryApp = {
                     categoryBreakdown[sec.title] += Math.max(0, impVal);
                     
                     if (opt.recommendationText) {
+                        const difficulty = opt.impactValue > 0.5 ? 'Hard' : (opt.impactValue > 0.2 ? 'Medium' : 'Easy');
+                        const impactLvl = opt.impactValue > 0.5 ? 'High' : (opt.impactValue > 0.2 ? 'Medium' : 'Low');
+                        const benefit = opt.impactValue > 0 ? `↓ ${(opt.impactValue * 0.8).toFixed(2)} t CO₂e/yr` : 'Maintains baseline';
+
                         recommendations.push({ 
                             icon: opt.icon || '🌱',
                             color: window.AppConfig ? window.AppConfig.COLORS[Object.keys(categoryBreakdown).length % window.AppConfig.COLORS.length] : '#8070FF',
                             title: opt.label, 
-                            text: opt.recommendationText 
+                            text: opt.recommendationText,
+                            difficulty: difficulty,
+                            impact: impactLvl,
+                            benefit: benefit
                         });
                     }
                 }
@@ -377,8 +406,14 @@ window.StoryApp = {
         const gridRecs = document.getElementById('recs-list');
         gridRecs.innerHTML = '';
         
+        // Carbon Action Plan Headings
+        $('#recs-list').before('<h3 style="margin-top: 2rem; margin-bottom: 1rem;">Your Personal Carbon Reduction Plan</h3>');
+
         if (recommendations.length > 0) {
-            recommendations.slice(0, 4).forEach(rec => {
+            // Sort by highest potential benefit
+            recommendations.sort((a, b) => b.benefit > a.benefit ? 1 : -1);
+
+            recommendations.slice(0, 5).forEach(rec => {
                 const item = document.createElement('div');
                 item.className = 'rec-item-horiz';
                 
@@ -392,13 +427,26 @@ window.StoryApp = {
                 content.className = 'rec-horiz-content';
                 
                 const title = document.createElement('strong');
-                title.textContent = `For ${rec.title}`;
+                title.textContent = `${rec.title}`;
                 
                 const text = document.createElement('p');
                 text.textContent = rec.text;
+
+                const metaData = document.createElement('div');
+                metaData.style.marginTop = '0.5rem';
+                metaData.style.fontSize = '0.85rem';
+                metaData.style.display = 'flex';
+                metaData.style.gap = '10px';
+
+                metaData.innerHTML = `
+                    <span style="background: var(--bg-light); padding: 2px 6px; border-radius: 4px;"><strong>Impact:</strong> ${rec.impact}</span>
+                    <span style="background: var(--bg-light); padding: 2px 6px; border-radius: 4px;"><strong>Difficulty:</strong> ${rec.difficulty}</span>
+                    <span style="background: var(--bg-light); padding: 2px 6px; border-radius: 4px; color: ${rec.color};"><strong>Benefit:</strong> ${rec.benefit}</span>
+                `;
                 
                 content.appendChild(title);
                 content.appendChild(text);
+                content.appendChild(metaData);
                 item.appendChild(iconBox);
                 item.appendChild(content);
                 gridRecs.appendChild(item);
@@ -420,6 +468,10 @@ window.StoryApp = {
         }
     },
 
+    /**
+     * Renders the historical progress dashboard and generated insights.
+     * @param {Array} history - Array of previous assessments.
+     */
     renderHistoryDashboard: function(history) {
         if (!history || history.length === 0) return;
 
@@ -529,6 +581,10 @@ window.StoryApp = {
         });
     },
 
+    /**
+     * Renders a responsive SVG trend chart for user history.
+     * @param {Array} history - Array of previous assessments.
+     */
     renderSVGChart: function(history) {
         const w = 400;
         const h = 150;

@@ -60,6 +60,10 @@ $(document).ready(function() {
     }
 
     // ----- Core Logic ----- //
+    /**
+     * Triggers the advancement to the next scene in the timeline.
+     * Prevents advancement if transitioning, video is playing, or at the end.
+     */
     function triggerNextScene() {
         // Only allow advancement if not transitioning, video is not playing (or we are on scene 0), and not at end
         if (isTransitioning || isVideoPlaying || currentScene >= totalScenes) return;
@@ -67,6 +71,10 @@ $(document).ready(function() {
         advanceToScene(currentScene + 1);
     }
 
+    /**
+     * Handles the complex crossfade and text animation between two scenes.
+     * @param {number} nextScene - The index of the target scene.
+     */
     function advanceToScene(nextScene) {
         isTransitioning = true;
         $scrollPrompt.css('opacity', '0'); // Hide scroll prompt during transition
@@ -137,6 +145,12 @@ $(document).ready(function() {
     }
 
     // ----- Year Animation Logic ----- //
+    /**
+     * Animates the year counter rapidly from a start year to an end year.
+     * @param {number} startYear - Starting year.
+     * @param {number} endYear - Target year.
+     * @param {number} duration - Duration in seconds.
+     */
     function animateYear(startYear, endYear, duration) {
         $({ val: startYear }).animate({ val: endYear }, {
             duration: duration * 1000,
@@ -150,6 +164,10 @@ $(document).ready(function() {
     }
 
     // ----- Video Playback Logic ----- //
+    /**
+     * Manages video playback for a specific scene, including accessibility fallbacks.
+     * @param {number} sceneIndex - Index of the scene video to play.
+     */
     function playSceneVideo(sceneIndex) {
         const $container = $(`.video-container[data-scene="${sceneIndex}"]`);
         const video = $container.find('video')[0];
@@ -174,7 +192,7 @@ $(document).ready(function() {
                     showFinalCTA();
                 }
             } else {
-                video.play().catch(err => console.log("Video play error:", err));
+                video.play().catch(err => console.error("Video play error:", err));
 
                 // Listen for end
                 video.onended = () => {
@@ -196,6 +214,9 @@ $(document).ready(function() {
         }
     }
 
+    /**
+     * Fades out the final scene and reveals the call to action block.
+     */
     function showFinalCTA() {
         // Fade out scene 6 text
         gsap.to($('#text-scene-6'), { opacity: 0, y: -20, duration: 0.8 });

@@ -9,10 +9,20 @@ Climate change often feels like an overwhelming, abstract problem disconnected f
 ## How CarbonStory Solves It
 CarbonStory transforms footprint calculation into an engaging, empathetic, and highly visual narrative experience. It connects daily choices directly to global consequences and delivers actionable, tailored steps for improvement.
 
-## Understand → Track → Reduce Framework
-- **UNDERSTAND**: The cinematic GSAP-driven intro and contextual micro-copy educate users on *why* their footprint matters before asking for data.
-- **TRACK**: The "Your Carbon Journey" dashboard securely saves assessments to `localStorage`, allowing users to visually monitor their improvement over time via SVG trend charts and badges.
-- **REDUCE**: A dynamic "Personalized Action Plan" analyzes the user's specific choices and generates targeted, practical recommendations (e.g., "Switch to a reusable bottle").
+## Problem Statement Mapping
+
+### UNDERSTAND
+- **Timeline Experience**: A cinematic scrolling intro utilizing GSAP.
+- **Educational Storytelling**: Micro-copy explicitly explaining why each category (Transport, Food, etc.) matters to global emissions.
+
+### TRACK
+- **Carbon Awareness Score**: A dynamically calculated metric based on user choices.
+- **Progress Tracking**: An interactive SVG chart that visualizes assessment history.
+- **History Dashboard**: A dedicated panel pulling from `localStorage` to review past performance and award streak badges.
+
+### REDUCE
+- **Personalized Recommendations**: Directly linked to user choices.
+- **Carbon Action Plan**: The top 5 generated actions complete with Impact Level, Difficulty, and Estimated Carbon Benefit.
 
 ## User Journey
 1. **The Hook (Intro)**: A cinematic scrolling experience visually demonstrating carbon concepts.
