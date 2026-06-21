@@ -22,44 +22,68 @@ window.StoryApp = {
         
         getHistory: function() {
             try {
-                return JSON.parse(localStorage.getItem(this.STORAGE_KEY)) || [];
+                const data = localStorage.getItem(this.STORAGE_KEY);
+                if (!data) return [];
+                const parsed = JSON.parse(data);
+                if (!Array.isArray(parsed)) throw new Error('Invalid storage format');
+                return parsed;
             } catch (e) {
+                console.warn('Storage corrupted, resetting history.');
+                this.clearHistory();
                 return [];
             }
+        },
+
+        clearHistory: function() {
+            localStorage.removeItem(this.STORAGE_KEY);
         }
     },
 
     init: async function() {
         try {
             const res = await fetch('./data/carbon-story.json');
+            if (!res.ok) throw new Error('Network response was not ok');
             const json = await res.json();
+            if (!json || !json.sections) throw new Error('Invalid JSON structure');
             this.data = json.sections;
             this.renderStep();
             this.attachGlobalEvents();
         } catch (e) {
-            console.error("Failed to load story data", e);
+            console.error("[Security] Failed to load or parse story data:", e);
+            $('#error-overlay').removeClass('hidden').find('.error-content').text('Unable to securely load experience. Please refresh.');
         }
     },
 
     renderProgressNodes: function() {
-        let html = '';
+        const container = document.getElementById('progress-nodes');
+        container.innerHTML = '';
         const nodeIcons = ['🚗', '🏠', '🍽️', '🛍️', '👤'];
         
         this.data.forEach((sec, i) => {
             const isActive = i === this.currentStepIndex;
             const isFilled = i < this.currentStepIndex;
             
-            html += `
-                <div class="node-wrap ${isActive ? 'active' : ''} ${isFilled ? 'filled' : ''}">
-                    <div class="node-circle">
-                        ${isFilled ? '✓' : (nodeIcons[i] || '•')}
-                    </div>
-                    <div class="node-label">${sec.title}</div>
-                    ${i < this.data.length - 1 ? `<div class="node-line ${isFilled ? 'filled' : ''}"></div>` : ''}
-                </div>
-            `;
+            const wrap = document.createElement('div');
+            wrap.className = `node-wrap ${isActive ? 'active' : ''} ${isFilled ? 'filled' : ''}`;
+            
+            const circle = document.createElement('div');
+            circle.className = 'node-circle';
+            circle.textContent = isFilled ? '✓' : (nodeIcons[i] || '•');
+            
+            const label = document.createElement('div');
+            label.className = 'node-label';
+            label.textContent = sec.title;
+            
+            wrap.appendChild(circle);
+            wrap.appendChild(label);
+            
+            if (i < this.data.length - 1) {
+                const line = document.createElement('div');
+                line.className = `node-line ${isFilled ? 'filled' : ''}`;
+                wrap.appendChild(line);
+            }
+            container.appendChild(wrap);
         });
-        $('#progress-nodes').html(html);
     },
 
     renderStep: function() {
@@ -80,37 +104,65 @@ window.StoryApp = {
         
         this.renderProgressNodes();
 
-        let cardsHtml = '';
+        const grid = document.getElementById('options-grid');
+        grid.innerHTML = '';
+        
         section.options.forEach((opt, index) => {
             const isSelected = (this.selections[section.id] || []).includes(opt.id);
             const row = this.currentStepIndex;
-            const col = index;
-            
-            // Calculate absolute index 1 to 30
-            const absoluteIndex = (row * 6) + col + 1;
+            const absoluteIndex = (row * 6) + index + 1;
             const paddedIndex = absoluteIndex.toString().padStart(2, '0');
             const imagePath = window.ASSETS.imageBase + `icons/${paddedIndex}.png`;
             
             const emissionClass = opt.emissionLevel || 'low';
             const emissionIcon = emissionClass === 'high' ? '☁️' : '🍃';
             
-            cardsHtml += `
-                <button class="opt-card ${isSelected ? 'selected' : ''}" data-id="${opt.id}" aria-pressed="${isSelected ? 'true' : 'false'}">
-                    <div class="card-img-box" aria-hidden="true">
-                        <img class="card-img" src="${imagePath}" alt="">
-                        <div class="check-circle">✓</div>
-                    </div>
-                    <div class="card-body">
-                        <div class="card-title">${opt.label}</div>
-                        <div class="emission-pill ${emissionClass}">
-                            <span class="icon" aria-hidden="true">${emissionIcon}</span> ${opt.emissionLabel}
-                        </div>
-                    </div>
-                </button>
-            `;
+            const btn = document.createElement('button');
+            btn.className = `opt-card ${isSelected ? 'selected' : ''}`;
+            btn.dataset.id = opt.id;
+            btn.setAttribute('aria-pressed', isSelected ? 'true' : 'false');
+            
+            const imgBox = document.createElement('div');
+            imgBox.className = 'card-img-box';
+            imgBox.setAttribute('aria-hidden', 'true');
+            
+            const img = document.createElement('img');
+            img.className = 'card-img';
+            img.src = imagePath;
+            img.alt = '';
+            
+            const check = document.createElement('div');
+            check.className = 'check-circle';
+            check.textContent = '✓';
+            
+            imgBox.appendChild(img);
+            imgBox.appendChild(check);
+            
+            const body = document.createElement('div');
+            body.className = 'card-body';
+            
+            const title = document.createElement('div');
+            title.className = 'card-title';
+            title.textContent = opt.label;
+            
+            const pill = document.createElement('div');
+            pill.className = `emission-pill ${emissionClass}`;
+            
+            const iconSpan = document.createElement('span');
+            iconSpan.className = 'icon';
+            iconSpan.setAttribute('aria-hidden', 'true');
+            iconSpan.textContent = emissionIcon;
+            
+            pill.appendChild(iconSpan);
+            pill.appendChild(document.createTextNode(' ' + opt.emissionLabel));
+            
+            body.appendChild(title);
+            body.appendChild(pill);
+            
+            btn.appendChild(imgBox);
+            btn.appendChild(body);
+            grid.appendChild(btn);
         });
-        
-        $('#options-grid').html(cardsHtml);
         
         $('#story-container').removeClass('hidden');
         $('#results-container').addClass('hidden');
@@ -209,7 +261,7 @@ window.StoryApp = {
         $('#story-container').addClass('hidden');
         $('#footer-actions').addClass('hidden');
         
-        let totalImpact = this.baseImpact;
+        let totalImpact = window.AppConfig ? window.AppConfig.BASE_IMPACT : 0.5;
         let categoryBreakdown = {};
         let recommendations = [];
 
@@ -218,9 +270,19 @@ window.StoryApp = {
             const selectedIds = this.selections[sec.id] || [];
             sec.options.forEach(opt => {
                 if (selectedIds.includes(opt.id)) {
-                    totalImpact += opt.impactValue;
-                    categoryBreakdown[sec.title] += Math.max(0, opt.impactValue);
-                    recommendations.push({ label: opt.label, text: opt.recommendationText });
+                    let impVal = parseFloat(opt.impactValue);
+                    if (isNaN(impVal)) impVal = 0;
+                    totalImpact += impVal;
+                    categoryBreakdown[sec.title] += Math.max(0, impVal);
+                    
+                    if (opt.recommendationText) {
+                        recommendations.push({ 
+                            icon: opt.icon || '🌱',
+                            color: window.AppConfig ? window.AppConfig.COLORS[Object.keys(categoryBreakdown).length % window.AppConfig.COLORS.length] : '#8070FF',
+                            title: opt.label, 
+                            text: opt.recommendationText 
+                        });
+                    }
                 }
             });
             if (categoryBreakdown[sec.title] < 0) categoryBreakdown[sec.title] = 0.1;
@@ -228,29 +290,28 @@ window.StoryApp = {
         });
 
         totalImpact = Math.max(0.1, totalImpact);
-
+        const avg = window.AppConfig ? window.AppConfig.GLOBAL_AVERAGE_EMISSIONS : 4.7;
         $('#final-score').text(totalImpact.toFixed(1));
-        const avg = 4.7; // Update global average to 4.7 as per design 
+        
+        let band = window.AppConfig ? (window.AppConfig.SCORE_BANDS.find(b => totalImpact <= b.max) || window.AppConfig.SCORE_BANDS[2]) : { badge: '👣', title: 'Your Impact', desc: 'Score calculated.' };
+        
         if (totalImpact <= avg) {
             $('#comparison-stat').text(`Better than 68% of people`);
             $('#compare-hl').text('lower than the global average').css('color', 'var(--success)');
             $('#meter-fill').css('width', `${(totalImpact/10)*100}%`).css('background', 'var(--success)');
-            
-            $('#center-msg-title').html(`<span class="footprint" style="color: var(--success)">👣</span> Low Impact`);
-            $('#center-msg-desc').text(`Great job! You're making a positive difference.`);
         } else {
             $('#comparison-stat').text(`Room for improvement`);
             $('#compare-hl').text('higher than the global average').css('color', 'var(--warning)');
             $('#meter-fill').css('width', `${Math.min(100, (totalImpact/10)*100)}%`).css('background', 'var(--warning)');
-            
-            $('#center-msg-title').html(`<span class="footprint" style="color: var(--warning)">👣</span> High Impact`);
-            $('#center-msg-desc').text(`Room for improvement. Every small step helps!`);
         }
+        
+        $('#center-msg-title').text(`${band.badge} ${band.title}`);
+        $('#center-msg-desc').text(band.desc);
         $('.meter-marker').css('left', `${(avg/10)*100}%`);
 
         let totalBreakdown = Object.values(categoryBreakdown).reduce((a,b)=>a+b, 0) || 1;
-        const colors = ['#8070FF', '#28C76F', '#FF9F43', '#FF70A6', '#4A90E2'];
-        const catIcons = ['🚗', '🏠', '🍽️', '🛍️', '💬'];
+        const colors = window.AppConfig ? window.AppConfig.COLORS : ['#8070FF', '#28C76F', '#FF9F43', '#FF70A6', '#4A90E2'];
+        const catIcons = window.AppConfig ? window.AppConfig.ICONS : ['🚗', '🏠', '🍽️', '🛍️', '💬'];
         
         let catHtml = '';
         Object.keys(categoryBreakdown).forEach((cat, index) => {
@@ -313,27 +374,36 @@ window.StoryApp = {
         $('#donut-chart').css('background', `conic-gradient(${conicStops.join(', ')})`);
         $('#donut-legend').html(legendHtml);
 
-        let recHtml = '';
-        // Mock horizontal recs with hardcoded text matching design since we might not have them in JSON exactly
-        const designRecs = [
-            { icon: '🚆', color: '#8070FF', title: 'Use public transport', text: '2-3 days a week', saving: '↓ 0.35 t CO₂e/year' },
-            { icon: '💡', color: '#FF9F43', title: 'Switch to LED lights', text: 'at home', saving: '↓ 0.12 t CO₂e/year' },
-            { icon: '🍃', color: '#28C76F', title: 'Eat more plant', text: 'based meals', saving: '↓ 0.28 t CO₂e/year' }
-        ];
-
-        designRecs.forEach(rec => {
-            recHtml += `
-                <div class="rec-item-horiz">
-                    <div class="rec-icon-horiz" style="background: ${rec.color}20; color: ${rec.color}">${rec.icon}</div>
-                    <div class="rec-horiz-content">
-                        <strong>${rec.title}</strong>
-                        <p>${rec.text}</p>
-                        <div class="rec-saving" style="color: ${rec.color}">${rec.saving}</div>
-                    </div>
-                </div>
-            `;
-        });
-        $('#recs-list').html(recHtml);
+        const gridRecs = document.getElementById('recs-list');
+        gridRecs.innerHTML = '';
+        
+        if (recommendations.length > 0) {
+            recommendations.slice(0, 4).forEach(rec => {
+                const item = document.createElement('div');
+                item.className = 'rec-item-horiz';
+                
+                const iconBox = document.createElement('div');
+                iconBox.className = 'rec-icon-horiz';
+                iconBox.style.background = `${rec.color}20`;
+                iconBox.style.color = rec.color;
+                iconBox.textContent = rec.icon;
+                
+                const content = document.createElement('div');
+                content.className = 'rec-horiz-content';
+                
+                const title = document.createElement('strong');
+                title.textContent = `For ${rec.title}`;
+                
+                const text = document.createElement('p');
+                text.textContent = rec.text;
+                
+                content.appendChild(title);
+                content.appendChild(text);
+                item.appendChild(iconBox);
+                item.appendChild(content);
+                gridRecs.appendChild(item);
+            });
+        }
 
         // --- Save and Render History ---
         const history = this.HistoryManager.saveAssessment(totalImpact, categoryBreakdown);
@@ -385,11 +455,11 @@ window.StoryApp = {
                 if (catDiff > maxWorse) { maxWorse = catDiff; worsenedCat = cat; }
             });
 
-            if (improvedCat) {
-                insightsHtml += `<div class="insight-item"><span aria-hidden="true">🌟</span> <div>Your <strong>${improvedCat}</strong> choices improved significantly.</div></div>`;
-            }
-            if (worsenedCat) {
-                insightsHtml += `<div class="insight-item"><span aria-hidden="true">⚠️</span> <div>Your <strong>${worsenedCat}</strong> emissions increased compared to last time.</div></div>`;
+            if (maxWorse > 0 && worsenedCat) {
+                const dynamicMsg = window.AppConfig ? (window.AppConfig.INSIGHT_MESSAGES[worsenedCat] || `Your emissions from ${worsenedCat} increased.`) : `Your emissions increased.`;
+                insightsHtml += `<div class="insight-item"><span aria-hidden="true">⚠️</span> <div>${dynamicMsg}</div></div>`;
+            } else if (maxImp > 0 && improvedCat) {
+                insightsHtml += `<div class="insight-item"><span aria-hidden="true">🌟</span> <div>Your <strong>${improvedCat}</strong> choices improved significantly. Great work!</div></div>`;
             }
             if (history.length >= 3) {
                 const prev2 = history[history.length - 3];
