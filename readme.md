@@ -296,6 +296,10 @@ Engaging educational challenge focused on environmental decision-making.
 
 Interactive lifestyle assessment covering multiple impact categories.
 
+### Progress Tracking (Understand → Track → Reduce)
+
+CarbonStory satisfies the "Track" requirement by storing user assessment history locally (using localStorage). Users can take the assessment multiple times and monitor their improvement via the "Your Carbon Journey" dashboard. This dashboard features a trend visualization chart (CSS/SVG), progress insights, achievement badges, and export capabilities (Download/Print), without requiring any backend architecture.
+
 ### Impact Visualization
 
 Clear presentation of user results and environmental impact.

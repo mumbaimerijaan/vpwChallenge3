@@ -4,6 +4,31 @@ window.StoryApp = {
     selections: {},
     baseImpact: 0.5,
 
+    HistoryManager: {
+        STORAGE_KEY: 'carbonStoryHistory',
+        
+        saveAssessment: function(totalImpact, breakdown) {
+            const history = this.getHistory();
+            const assessment = {
+                id: Date.now(),
+                date: new Date().toLocaleDateString(undefined, { year: 'numeric', month: 'short', day: 'numeric' }),
+                score: parseFloat(totalImpact.toFixed(1)),
+                breakdown: breakdown
+            };
+            history.push(assessment);
+            localStorage.setItem(this.STORAGE_KEY, JSON.stringify(history));
+            return history;
+        },
+        
+        getHistory: function() {
+            try {
+                return JSON.parse(localStorage.getItem(this.STORAGE_KEY)) || [];
+            } catch (e) {
+                return [];
+            }
+        }
+    },
+
     init: async function() {
         try {
             const res = await fetch('./data/carbon-story.json');
@@ -310,6 +335,10 @@ window.StoryApp = {
         });
         $('#recs-list').html(recHtml);
 
+        // --- Save and Render History ---
+        const history = this.HistoryManager.saveAssessment(totalImpact, categoryBreakdown);
+        this.renderHistoryDashboard(history);
+
         $('#results-container').removeClass('hidden');
         $('#center-msg-title').attr('tabindex', '-1').focus();
         window.scrollTo(0, 0);
@@ -319,6 +348,158 @@ window.StoryApp = {
         if (announcer) {
             announcer.textContent = `Results generated. Your total annual emissions are ${totalImpact.toFixed(1)} tonnes. Impact is ${totalImpact <= avg ? 'Low' : 'High'}.`;
         }
+    },
+
+    renderHistoryDashboard: function(history) {
+        if (!history || history.length === 0) return;
+
+        const current = history[history.length - 1];
+        const previous = history.length > 1 ? history[history.length - 2] : null;
+
+        // 1. Insights & Comparison
+        if (previous) {
+            const diff = current.score - previous.score;
+            const pct = Math.round(Math.abs(diff / previous.score) * 100);
+            
+            if (diff < 0) {
+                $('#history-comparison-text').html(`Great! You reduced your footprint by <span class="trend-down">${pct}%</span> (<span class="trend-down">${diff.toFixed(1)} t</span>)`);
+            } else if (diff > 0) {
+                $('#history-comparison-text').html(`Your footprint increased by <span class="trend-up">${pct}%</span> (<span class="trend-up">+${diff.toFixed(1)} t</span>)`);
+            } else {
+                $('#history-comparison-text').html(`Your footprint remained the same.`);
+            }
+
+            // Generate Insights
+            let insightsHtml = '';
+            let improvedCat = null;
+            let worsenedCat = null;
+            let maxImp = 0;
+            let maxWorse = 0;
+
+            Object.keys(current.breakdown).forEach(cat => {
+                const curVal = current.breakdown[cat];
+                const prevVal = previous.breakdown[cat] || curVal;
+                const catDiff = curVal - prevVal;
+                
+                if (catDiff < maxImp) { maxImp = catDiff; improvedCat = cat; }
+                if (catDiff > maxWorse) { maxWorse = catDiff; worsenedCat = cat; }
+            });
+
+            if (improvedCat) {
+                insightsHtml += `<div class="insight-item"><span aria-hidden="true">🌟</span> <div>Your <strong>${improvedCat}</strong> choices improved significantly.</div></div>`;
+            }
+            if (worsenedCat) {
+                insightsHtml += `<div class="insight-item"><span aria-hidden="true">⚠️</span> <div>Your <strong>${worsenedCat}</strong> emissions increased compared to last time.</div></div>`;
+            }
+            if (history.length >= 3) {
+                const prev2 = history[history.length - 3];
+                if (current.score < previous.score && previous.score < prev2.score) {
+                    insightsHtml += `<div class="insight-item"><span aria-hidden="true">🔥</span> <div>You're on a streak! 3 consecutive assessments with reductions.</div></div>`;
+                }
+            }
+
+            $('#history-insights-list').html(insightsHtml);
+        } else {
+            $('#history-comparison-text').text('Complete another assessment to track progress!');
+            $('#history-insights-list').html(`<div class="insight-item"><span aria-hidden="true">🌱</span> <div>This is your baseline. Try changing a few habits next time!</div></div>`);
+        }
+
+        // 2. Badges
+        let badgesHtml = '';
+        if (history.length >= 1) badgesHtml += `<div class="badge">🌱 First Assessment</div>`;
+        if (previous && current.score < previous.score) badgesHtml += `<div class="badge">📉 Carbon Reducer</div>`;
+        if (current.score < 4.7) badgesHtml += `<div class="badge">🌍 Green Champion</div>`;
+        if (history.length >= 3 && history[history.length-1].score < history[history.length-2].score && history[history.length-2].score < history[history.length-3].score) {
+            badgesHtml += `<div class="badge">🔥 3-Streak Improvement</div>`;
+        }
+        $('#achievements-list').html(badgesHtml);
+
+        // 3. Timeline Cards
+        let timelineHtml = '';
+        const displayHistory = [...history].reverse(); // newest first
+        displayHistory.forEach((item, index) => {
+            const isCurrent = index === 0;
+            let trendHtml = '';
+            if (index < displayHistory.length - 1) { // Compare with older
+                const older = displayHistory[index + 1];
+                const itemDiff = item.score - older.score;
+                if (itemDiff < 0) trendHtml = `<div class="timeline-trend trend-down">↓ ${Math.abs(itemDiff).toFixed(1)}</div>`;
+                else if (itemDiff > 0) trendHtml = `<div class="timeline-trend trend-up">↑ ${itemDiff.toFixed(1)}</div>`;
+                else trendHtml = `<div class="timeline-trend trend-neutral">- 0.0</div>`;
+            }
+            timelineHtml += `
+                <div class="timeline-card ${isCurrent ? 'current' : ''}">
+                    <span class="timeline-date">${item.date} ${isCurrent ? '(Now)' : ''}</span>
+                    <div class="timeline-score">${item.score}</div>
+                    ${trendHtml}
+                </div>
+            `;
+        });
+        $('#timeline-cards').html(timelineHtml);
+
+        // 4. SVG Chart
+        if (history.length > 1) {
+            this.renderSVGChart(history);
+        } else {
+            $('#trend-chart-container').html('<div style="color: var(--text-light); font-size: 0.9rem;">Chart will appear after your next assessment.</div>');
+        }
+
+        // 5. Export Binding
+        $('#btn-print').off('click').on('click', () => window.print());
+        $('#btn-export-txt').off('click').on('click', () => {
+            let text = "CarbonStory - Progress Summary\n\n";
+            history.forEach((h, i) => {
+                text += `Assessment ${i+1} (${h.date}): ${h.score} tonnes CO2e\n`;
+            });
+            const blob = new Blob([text], { type: 'text/plain' });
+            const a = document.createElement('a');
+            a.href = URL.createObjectURL(blob);
+            a.download = 'CarbonStory-History.txt';
+            a.click();
+        });
+    },
+
+    renderSVGChart: function(history) {
+        const w = 400;
+        const h = 150;
+        const padX = 20;
+        const padY = 20;
+        
+        // Take up to last 10 points
+        const points = history.slice(-10);
+        
+        const maxScore = Math.max(...points.map(p => p.score), 5);
+        const minScore = 0;
+        
+        let svg = `<svg viewBox="0 0 ${w} ${h}" width="100%" height="100%" preserveAspectRatio="none">`;
+        
+        // Y Axis Grid
+        svg += `<line x1="${padX}" y1="${padY}" x2="${w-padX}" y2="${padY}" stroke="rgba(0,0,0,0.1)" stroke-dasharray="4"/>`;
+        svg += `<line x1="${padX}" y1="${h-padY}" x2="${w-padX}" y2="${h-padY}" stroke="rgba(0,0,0,0.1)"/>`;
+        
+        // Line
+        let pathD = "";
+        const stepX = (w - 2*padX) / Math.max(1, (points.length - 1));
+        
+        points.forEach((p, i) => {
+            const x = padX + i * stepX;
+            // map score to Y: top is maxScore, bottom is minScore
+            const y = h - padY - ((p.score - minScore) / (maxScore - minScore)) * (h - 2*padY);
+            if (i === 0) pathD += `M ${x} ${y} `;
+            else pathD += `L ${x} ${y} `;
+        });
+        
+        svg += `<path d="${pathD}" fill="none" stroke="#8070FF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>`;
+        
+        // Dots
+        points.forEach((p, i) => {
+            const x = padX + i * stepX;
+            const y = h - padY - ((p.score - minScore) / (maxScore - minScore)) * (h - 2*padY);
+            svg += `<circle cx="${x}" cy="${y}" r="5" fill="#8070FF" stroke="#fff" stroke-width="2"><title>${p.date}: ${p.score}</title></circle>`;
+        });
+        
+        svg += `</svg>`;
+        $('#trend-chart-container').html(svg);
     }
 };
 
