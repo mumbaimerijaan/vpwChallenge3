@@ -2,18 +2,24 @@
 
 document.addEventListener("DOMContentLoaded", () => {
     
-    // Ensure elements are visible to GSAP but hidden initially via autoAlpha
-    gsap.set(".gsap-element", { autoAlpha: 0, y: 20 });
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-    // Staggered entrance animation
-    gsap.to(".gsap-element", {
-        autoAlpha: 1,
-        y: 0,
-        duration: 0.8,
-        stagger: 0.15,
-        ease: "power2.out",
-        delay: 0.2
-    });
+    if (prefersReducedMotion) {
+        gsap.set(".gsap-element", { autoAlpha: 1, y: 0 });
+    } else {
+        // Ensure elements are visible to GSAP but hidden initially via autoAlpha
+        gsap.set(".gsap-element", { autoAlpha: 0, y: 20 });
+
+        // Staggered entrance animation
+        gsap.to(".gsap-element", {
+            autoAlpha: 1,
+            y: 0,
+            duration: 0.8,
+            stagger: 0.15,
+            ease: "power2.out",
+            delay: 0.2
+        });
+    }
 
     // Navigation logic
     const btnBegin = document.getElementById("btn-begin");

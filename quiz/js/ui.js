@@ -29,20 +29,20 @@ window.QuizApp.UI = {
         $('#score-total').text(total);
         
         // Render Text
-        $('#question-text').text(q.question);
+        $('#question-text').text(q.question).attr('tabindex', '-1').focus();
         $('#question-subtitle').text(q.subtitle || '');
         
         // Card A
         $('#title-a, #back-title-a').text(q.optionA.title);
         $('#sub-a, #back-sub-a').text(q.optionA.subtitle);
-        $('#img-a').attr('src', window.ASSETS.imageBase + q.optionA.image).attr('alt', q.optionA.title);
+        $('#img-a').attr('src', window.ASSETS.imageBase + q.optionA.image).attr('alt', q.optionA.title + ': ' + q.optionA.description);
         $('#co2-a').text(q.optionA.co2);
         $('#desc-a').text(q.optionA.description);
         
         // Card B
         $('#title-b, #back-title-b').text(q.optionB.title);
         $('#sub-b, #back-sub-b').text(q.optionB.subtitle);
-        $('#img-b').attr('src', window.ASSETS.imageBase + q.optionB.image).attr('alt', q.optionB.title);
+        $('#img-b').attr('src', window.ASSETS.imageBase + q.optionB.image).attr('alt', q.optionB.title + ': ' + q.optionB.description);
         $('#co2-b').text(q.optionB.co2);
         $('#desc-b').text(q.optionB.description);
 
@@ -205,6 +205,7 @@ window.QuizApp.UI = {
         $('.footer-actions').addClass('hidden');
         
         $('#summary-container').removeClass('hidden');
+        $('.summary-title').attr('tabindex', '-1').focus();
         
         const score = window.QuizApp.State.score;
         const total = window.QuizApp.Data.getTotalQuestions();

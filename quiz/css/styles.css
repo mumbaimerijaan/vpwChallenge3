@@ -194,6 +194,11 @@ body {
   width: 350px;
   perspective: 1000px;
   cursor: pointer;
+  border: none;
+  background: none;
+  padding: 0;
+  font: inherit;
+  text-align: left;
 }
 .card {
   width: 100%;

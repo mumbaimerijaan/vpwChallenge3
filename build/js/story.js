@@ -50,7 +50,7 @@ window.StoryApp = {
         $('#hero-bg').css('background-image', `url('${window.ASSETS.imageBase + section.heroImage}')`);
         
         $('#sec-title').text(section.title.toUpperCase());
-        $('#sec-question').text(section.question);
+        $('#sec-question').text(section.question).attr('tabindex', '-1').focus();
         $('#sec-desc').text(section.description);
         
         this.renderProgressNodes();
@@ -70,7 +70,7 @@ window.StoryApp = {
             const emissionIcon = emissionClass === 'high' ? '☁️' : '🍃';
             
             cardsHtml += `
-                <div class="opt-card ${isSelected ? 'selected' : ''}" data-id="${opt.id}" role="button" tabindex="0" aria-pressed="${isSelected ? 'true' : 'false'}">
+                <button class="opt-card ${isSelected ? 'selected' : ''}" data-id="${opt.id}" aria-pressed="${isSelected ? 'true' : 'false'}">
                     <div class="card-img-box" aria-hidden="true">
                         <img class="card-img" src="${imagePath}" alt="">
                         <div class="check-circle">✓</div>
@@ -81,7 +81,7 @@ window.StoryApp = {
                             <span class="icon" aria-hidden="true">${emissionIcon}</span> ${opt.emissionLabel}
                         </div>
                     </div>
-                </div>
+                </button>
             `;
         });
         
@@ -311,6 +311,7 @@ window.StoryApp = {
         $('#recs-list').html(recHtml);
 
         $('#results-container').removeClass('hidden');
+        $('#center-msg-title').attr('tabindex', '-1').focus();
         window.scrollTo(0, 0);
 
         // Announce Results
