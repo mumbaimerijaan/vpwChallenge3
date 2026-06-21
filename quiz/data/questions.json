@@ -7,14 +7,14 @@
       "optionA": {
         "title": "Car Trip",
         "subtitle": "20 km",
-        "image": "images/q1-a.png",
+        "image": "q1-a.png",
         "co2": "2.8 kg CO₂",
         "description": "Car travel emits significantly more carbon."
       },
       "optionB": {
         "title": "Train Trip",
         "subtitle": "20 km",
-        "image": "images/q1-b.png",
+        "image": "q1-b.png",
         "co2": "0.4 kg CO₂",
         "description": "Rail travel is more carbon efficient."
       },
@@ -28,14 +28,14 @@
       "optionA": {
         "title": "Flight",
         "subtitle": "Mumbai–Delhi",
-        "image": "images/q2-a.png",
+        "image": "q2-a.png",
         "co2": "130 kg CO₂",
         "description": "Aviation is highly carbon intensive per passenger."
       },
       "optionB": {
         "title": "Train",
         "subtitle": "Mumbai–Delhi",
-        "image": "images/q2-b.png",
+        "image": "q2-b.png",
         "co2": "20 kg CO₂",
         "description": "Long distance rail travel is very efficient."
       },
@@ -49,14 +49,14 @@
       "optionA": {
         "title": "Solo Commute",
         "subtitle": "Driving alone",
-        "image": "images/q3-a.png",
+        "image": "q3-a.png",
         "co2": "3.5 kg CO₂",
         "description": "One person absorbing all emissions."
       },
       "optionB": {
         "title": "Carpool",
         "subtitle": "4 people sharing",
-        "image": "images/q3-b.png",
+        "image": "q3-b.png",
         "co2": "0.9 kg CO₂",
         "description": "Emissions divided by four passengers."
       },
@@ -70,14 +70,14 @@
       "optionA": {
         "title": "Petrol Scooter",
         "subtitle": "Daily ride",
-        "image": "images/q4-a.png",
+        "image": "q4-a.png",
         "co2": "1.2 kg CO₂",
         "description": "Two-wheelers emit less than cars but more than transit."
       },
       "optionB": {
         "title": "Metro Train",
         "subtitle": "Public transit",
-        "image": "images/q4-b.png",
+        "image": "q4-b.png",
         "co2": "0.2 kg CO₂",
         "description": "Highly efficient electric mass transit."
       },
@@ -91,14 +91,14 @@
       "optionA": {
         "title": "AC Running",
         "subtitle": "8 Hours",
-        "image": "images/q5-a.png",
+        "image": "q5-a.png",
         "co2": "6.0 kg CO₂",
         "description": "High power consumption for cooling."
       },
       "optionB": {
         "title": "Ceiling Fan",
         "subtitle": "8 Hours",
-        "image": "images/q5-b.png",
+        "image": "q5-b.png",
         "co2": "0.4 kg CO₂",
         "description": "Very low power consumption."
       },
@@ -112,14 +112,14 @@
       "optionA": {
         "title": "Incandescent",
         "subtitle": "Traditional Bulb",
-        "image": "images/q6-a.png",
+        "image": "q6-a.png",
         "co2": "0.8 kg CO₂",
         "description": "Wastes most energy as heat."
       },
       "optionB": {
         "title": "LED Bulb",
         "subtitle": "Modern Lighting",
-        "image": "images/q6-b.png",
+        "image": "q6-b.png",
         "co2": "0.1 kg CO₂",
         "description": "Highly energy efficient."
       },
@@ -133,14 +133,14 @@
       "optionA": {
         "title": "Electric Geyser",
         "subtitle": "Daily use",
-        "image": "images/q7-a.png",
+        "image": "q7-a.png",
         "co2": "1.5 kg CO₂",
         "description": "Heating large volumes of water requires high energy."
       },
       "optionB": {
         "title": "Bucket Bath",
         "subtitle": "Ambient or sun-heated",
-        "image": "images/q7-b.png",
+        "image": "q7-b.png",
         "co2": "0.1 kg CO₂",
         "description": "Saves water and energy."
       },
@@ -154,14 +154,14 @@
       "optionA": {
         "title": "Mutton Meal",
         "subtitle": "Red meat",
-        "image": "images/q8-a.png",
+        "image": "q8-a.png",
         "co2": "4.5 kg CO₂",
         "description": "Livestock farming produces high methane and CO2."
       },
       "optionB": {
         "title": "Dal Meal",
         "subtitle": "Plant-based",
-        "image": "images/q8-b.png",
+        "image": "q8-b.png",
         "co2": "0.5 kg CO₂",
         "description": "Lentils and grains have a very low footprint."
       },
@@ -175,14 +175,14 @@
       "optionA": {
         "title": "Imported Apples",
         "subtitle": "Flown in",
-        "image": "images/q9-a.png",
+        "image": "q9-a.png",
         "co2": "2.0 kg CO₂",
         "description": "High air miles and cold storage."
       },
       "optionB": {
         "title": "Local Fruit",
         "subtitle": "Seasonal",
-        "image": "images/q9-b.png",
+        "image": "q9-b.png",
         "co2": "0.2 kg CO₂",
         "description": "Grown nearby, requiring less transport."
       },
@@ -196,14 +196,14 @@
       "optionA": {
         "title": "Food Delivery",
         "subtitle": "App order",
-        "image": "images/q10-a.png",
+        "image": "q10-a.png",
         "co2": "1.2 kg CO₂",
         "description": "Delivery logistics and packaging add up."
       },
       "optionB": {
         "title": "Home Cooked",
         "subtitle": "Family meal",
-        "image": "images/q10-b.png",
+        "image": "q10-b.png",
         "co2": "0.4 kg CO₂",
         "description": "Bulk ingredients and no plastic packaging."
       },
@@ -217,14 +217,14 @@
       "optionA": {
         "title": "Fast Fashion",
         "subtitle": "Buying new",
-        "image": "images/q11-a.png",
+        "image": "q11-a.png",
         "co2": "15.0 kg CO₂",
         "description": "Manufacturing and shipping new garments is intensive."
       },
       "optionB": {
         "title": "Reusing",
         "subtitle": "Existing clothes",
-        "image": "images/q11-b.png",
+        "image": "q11-b.png",
         "co2": "0.0 kg CO₂ saved",
         "description": "Extending the life of garments has zero new emissions."
       },
@@ -238,14 +238,14 @@
       "optionA": {
         "title": "New Phone",
         "subtitle": "Upgrading yearly",
-        "image": "images/q12-a.png",
+        "image": "q12-a.png",
         "co2": "60.0 kg CO₂",
         "description": "Manufacturing electronics requires rare earth mining."
       },
       "optionB": {
         "title": "Keep 4 Years",
         "subtitle": "Same phone",
-        "image": "images/q12-b.png",
+        "image": "q12-b.png",
         "co2": "15.0 kg CO₂",
         "description": "Spreads the manufacturing footprint over more years."
       },
@@ -259,14 +259,14 @@
       "optionA": {
         "title": "Bottled Water",
         "subtitle": "Daily plastic",
-        "image": "images/q13-a.png",
+        "image": "q13-a.png",
         "co2": "0.5 kg CO₂",
         "description": "Manufacturing and transporting plastic."
       },
       "optionB": {
         "title": "Reusable Bottle",
         "subtitle": "Steel/Glass",
-        "image": "images/q13-b.png",
+        "image": "q13-b.png",
         "co2": "0.01 kg CO₂",
         "description": "One-time manufacturing cost."
       },
@@ -280,14 +280,14 @@
       "optionA": {
         "title": "4K Streaming",
         "subtitle": "All day",
-        "image": "images/q14-a.png",
+        "image": "q14-a.png",
         "co2": "1.8 kg CO₂",
         "description": "High data transfer requires massive data centers."
       },
       "optionB": {
         "title": "Reading",
         "subtitle": "Downloaded content",
-        "image": "images/q14-b.png",
+        "image": "q14-b.png",
         "co2": "0.1 kg CO₂",
         "description": "Low device power and no active data streaming."
       },
@@ -301,14 +301,14 @@
       "optionA": {
         "title": "Hoarding Files",
         "subtitle": "Thousands unused",
-        "image": "images/q15-a.png",
+        "image": "q15-a.png",
         "co2": "2.5 kg CO₂",
         "description": "Cloud servers run 24/7 to store your data."
       },
       "optionB": {
         "title": "Digital Cleanup",
         "subtitle": "Deleting old files",
-        "image": "images/q15-b.png",
+        "image": "q15-b.png",
         "co2": "0.0 kg CO₂ saved",
         "description": "Frees up server space and reduces power needs."
       },

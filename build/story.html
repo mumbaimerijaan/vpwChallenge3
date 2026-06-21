@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="css/story.css">
 </head>
 <body>
-    <div class="hero-bg" id="hero-bg" style="background-image: url('images/hero-transport.png');"></div>
+    <div class="hero-bg" id="hero-bg" data-bg-asset="heroTransport"></div>
     <div class="gradient-overlay" id="gradient-overlay"></div>
 
     <main class="app-wrapper" id="app-main">
@@ -127,7 +127,7 @@
                             <!-- Comparison -->
                             <div class="compare-card glass-pane dark-theme" style="margin-bottom: 0;">
                                 <div class="globe-viz">
-                                    <img src="images/globe.png" alt="Globe" style="width: 100%; border-radius: 50%; box-shadow: 0 0 20px rgba(74, 144, 226, 0.4);">
+                                    <img data-asset="globeIcon" alt="Globe" style="width: 100%; border-radius: 50%; box-shadow: 0 0 20px rgba(74, 144, 226, 0.4);">
                                 </div>
                                 <div class="compare-info">
                                     <h3>How do you compare?</h3>
@@ -200,7 +200,7 @@
             <div class="results-footer glass-pane">
                 <div class="footer-msg">
                     <div class="footer-icon-box">
-                        <img src="images/icons/05.png" alt="Path" style="width: 40px; border-radius: 50%;">
+                        <img id="footer-icon" alt="Path" style="width: 40px; border-radius: 50%;">
                     </div>
                     <div class="msg-text">
                         <strong>You're on the right path! <span style="font-size: 1.2rem;">🎉</span></strong>
@@ -368,6 +368,7 @@
         </div>
     </div>
 
+    <script src="../config/assets.js"></script>
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <script src="js/story.js"></script>
 </body>

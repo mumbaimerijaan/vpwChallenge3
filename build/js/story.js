@@ -47,7 +47,7 @@ window.StoryApp = {
         
         $('#step-val').text(this.currentStepIndex + 1);
         $('#step-total').text(this.data.length);
-        $('#hero-bg').css('background-image', `url('${section.heroImage}')`);
+        $('#hero-bg').css('background-image', `url('${window.ASSETS.imageBase + section.heroImage}')`);
         
         $('#sec-title').text(section.title.toUpperCase());
         $('#sec-question').text(section.question);
@@ -64,7 +64,7 @@ window.StoryApp = {
             // Calculate absolute index 1 to 30
             const absoluteIndex = (row * 6) + col + 1;
             const paddedIndex = absoluteIndex.toString().padStart(2, '0');
-            const imagePath = `images/icons/${paddedIndex}.png`;
+            const imagePath = window.ASSETS.imageBase + `icons/${paddedIndex}.png`;
             
             const emissionClass = opt.emissionLevel || 'low';
             const emissionIcon = emissionClass === 'high' ? '☁️' : '🍃';
@@ -155,7 +155,8 @@ window.StoryApp = {
 
     showResults: function() {
         // Apply result specific styles
-        $('#hero-bg').css('background-image', 'url("images/hero-result.png")').css('background-color', 'var(--bg-color)');
+        $('#hero-bg').css('background-image', `url("${window.ASSETS.images.heroResult}")`).css('background-color', 'var(--bg-color)');
+        $('#footer-icon').attr('src', window.ASSETS.imageBase + 'icons/05.png');
         $('.gradient-overlay').hide();
         $('#app-main').addClass('results-mode');
         

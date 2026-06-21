@@ -11,7 +11,7 @@
           "label": "Car",
           "impactValue": 0.72,
           "recommendationText": "Try carpooling or using public transport 2-3 days a week.",
-          "image": "images/opt-car.png",
+          "image": "opt-car.png",
           "icon": "🚗",
           "emissionLabel": "High Emissions",
           "emissionLevel": "high"
@@ -21,7 +21,7 @@
           "label": "Bike / Scooter",
           "impactValue": 0.35,
           "recommendationText": "Keep your vehicle well-maintained for better fuel efficiency.",
-          "image": "images/opt-bike.png",
+          "image": "opt-bike.png",
           "icon": "🛵",
           "emissionLabel": "Medium Emissions",
           "emissionLevel": "medium"
@@ -31,7 +31,7 @@
           "label": "Train",
           "impactValue": 0.1,
           "recommendationText": "Great choice! Trains are highly efficient for long distances.",
-          "image": "images/opt-train.png",
+          "image": "opt-train.png",
           "icon": "🚆",
           "emissionLabel": "Low Emissions",
           "emissionLevel": "low"
@@ -41,7 +41,7 @@
           "label": "Metro",
           "impactValue": 0.05,
           "recommendationText": "Metro is one of the greenest ways to commute in the city.",
-          "image": "images/opt-metro.png",
+          "image": "opt-metro.png",
           "icon": "🚇",
           "emissionLabel": "Low Emissions",
           "emissionLevel": "low"
@@ -51,7 +51,7 @@
           "label": "Bus",
           "impactValue": 0.15,
           "recommendationText": "Buses reduce traffic and per-passenger emissions significantly.",
-          "image": "images/opt-bus.png",
+          "image": "opt-bus.png",
           "icon": "🚌",
           "emissionLabel": "Low Emissions",
           "emissionLevel": "low"
@@ -61,13 +61,13 @@
           "label": "Flight",
           "impactValue": 0.6,
           "recommendationText": "Reduce short-distance flights where possible and opt for trains.",
-          "image": "images/opt-flight.png",
+          "image": "opt-flight.png",
           "icon": "✈️",
           "emissionLabel": "High Emissions",
           "emissionLevel": "high"
         }
       ],
-      "heroImage": "images/hero-transport.png"
+      "heroImage": "hero-transport.png"
     },
     {
       "id": "home",
@@ -80,7 +80,7 @@
           "label": "Air Conditioner",
           "impactValue": 0.8,
           "recommendationText": "Increase thermostat temperature by 1-2°C to save significant energy.",
-          "image": "images/opt-ac.png",
+          "image": "opt-ac.png",
           "icon": "❄️",
           "emissionLabel": "High Emissions",
           "emissionLevel": "high"
@@ -90,7 +90,7 @@
           "label": "Ceiling Fan",
           "impactValue": 0.05,
           "recommendationText": "Fans use a fraction of the energy of an AC. Good job!",
-          "image": "images/opt-fan.png",
+          "image": "opt-fan.png",
           "icon": "🌀",
           "emissionLabel": "Low Emissions",
           "emissionLevel": "low"
@@ -100,7 +100,7 @@
           "label": "LED Lighting",
           "impactValue": 0.02,
           "recommendationText": "LEDs are extremely energy efficient.",
-          "image": "images/opt-led.png",
+          "image": "opt-led.png",
           "icon": "💡",
           "emissionLabel": "Low Emissions",
           "emissionLevel": "low"
@@ -110,7 +110,7 @@
           "label": "Geyser",
           "impactValue": 0.3,
           "recommendationText": "Turn off the geyser immediately after use or switch to solar heating.",
-          "image": "images/opt-geyser.png",
+          "image": "opt-geyser.png",
           "icon": "♨️",
           "emissionLabel": "Medium Emissions",
           "emissionLevel": "medium"
@@ -120,7 +120,7 @@
           "label": "Solar Panels",
           "impactValue": -0.5,
           "recommendationText": "Solar panels significantly offset your grid energy reliance!",
-          "image": "images/opt-solar.png",
+          "image": "opt-solar.png",
           "icon": "☀️",
           "emissionLabel": "Low Emissions",
           "emissionLevel": "low"
@@ -130,13 +130,13 @@
           "label": "Energy Efficient Appliances",
           "impactValue": -0.1,
           "recommendationText": "5-star rated appliances save money and emissions over time.",
-          "image": "images/opt-efficient.png",
+          "image": "opt-efficient.png",
           "icon": "🔋",
           "emissionLabel": "Low Emissions",
           "emissionLevel": "low"
         }
       ],
-      "heroImage": "images/hero-home.png"
+      "heroImage": "hero-home.png"
     },
     {
       "id": "food",
@@ -149,7 +149,7 @@
           "label": "Meat Frequently",
           "impactValue": 0.6,
           "recommendationText": "Try one plant-based meal weekly to lower your food footprint.",
-          "image": "images/opt-meat.png",
+          "image": "opt-meat.png",
           "icon": "🥩",
           "emissionLabel": "High Emissions",
           "emissionLevel": "high"
@@ -159,7 +159,7 @@
           "label": "Eggs / Poultry",
           "impactValue": 0.3,
           "recommendationText": "Poultry has a lower footprint than red meat, but consider more plant proteins.",
-          "image": "images/opt-eggs.png",
+          "image": "opt-eggs.png",
           "icon": "🥚",
           "emissionLabel": "Medium Emissions",
           "emissionLevel": "medium"
@@ -169,7 +169,7 @@
           "label": "Vegetarian",
           "impactValue": 0.25,
           "recommendationText": "Vegetarian diets are very carbon efficient.",
-          "image": "images/opt-veg.png",
+          "image": "opt-veg.png",
           "icon": "🥗",
           "emissionLabel": "Medium Emissions",
           "emissionLevel": "medium"
@@ -179,7 +179,7 @@
           "label": "Vegan",
           "impactValue": 0.15,
           "recommendationText": "Vegan diets have the lowest carbon footprint of all diet types.",
-          "image": "images/opt-vegan.png",
+          "image": "opt-vegan.png",
           "icon": "🌱",
           "emissionLabel": "Low Emissions",
           "emissionLevel": "low"
@@ -189,7 +189,7 @@
           "label": "Home Cooked Meals",
           "impactValue": 0.1,
           "recommendationText": "Cooking at home reduces packaging and transport emissions.",
-          "image": "images/opt-home-cooked.png",
+          "image": "opt-home-cooked.png",
           "icon": "🍳",
           "emissionLabel": "Low Emissions",
           "emissionLevel": "low"
@@ -199,13 +199,13 @@
           "label": "Food Delivery Often",
           "impactValue": 0.3,
           "recommendationText": "Try cooking at home more often to avoid single-use plastics and delivery logistics.",
-          "image": "images/opt-delivery.png",
+          "image": "opt-delivery.png",
           "icon": "🥡",
           "emissionLabel": "Medium Emissions",
           "emissionLevel": "medium"
         }
       ],
-      "heroImage": "images/hero-food.png"
+      "heroImage": "hero-food.png"
     },
     {
       "id": "shopping",
@@ -218,7 +218,7 @@
           "label": "Online Shopping Frequently",
           "impactValue": 0.4,
           "recommendationText": "Consolidate your online orders to reduce delivery trips.",
-          "image": "images/opt-online.png",
+          "image": "opt-online.png",
           "icon": "📦",
           "emissionLabel": "Medium Emissions",
           "emissionLevel": "medium"
@@ -228,7 +228,7 @@
           "label": "Fast Fashion",
           "impactValue": 0.3,
           "recommendationText": "Invest in higher quality clothes that last longer instead of fast fashion.",
-          "image": "images/opt-fast-fashion.png",
+          "image": "opt-fast-fashion.png",
           "icon": "👗",
           "emissionLabel": "Medium Emissions",
           "emissionLevel": "medium"
@@ -238,7 +238,7 @@
           "label": "Electronics Often",
           "impactValue": 0.2,
           "recommendationText": "Repair devices before replacing them to reduce e-waste.",
-          "image": "images/opt-electronics.png",
+          "image": "opt-electronics.png",
           "icon": "📱",
           "emissionLabel": "Medium Emissions",
           "emissionLevel": "medium"
@@ -248,7 +248,7 @@
           "label": "Reusable Products",
           "impactValue": -0.1,
           "recommendationText": "Using reusable bags and bottles prevents plastic pollution.",
-          "image": "images/opt-reusable.png",
+          "image": "opt-reusable.png",
           "icon": "♻️",
           "emissionLabel": "Low Emissions",
           "emissionLevel": "low"
@@ -258,7 +258,7 @@
           "label": "Second Hand Purchases",
           "impactValue": -0.15,
           "recommendationText": "Buying used goods extends their lifecycle and prevents new manufacturing emissions.",
-          "image": "images/opt-second-hand.png",
+          "image": "opt-second-hand.png",
           "icon": "👕",
           "emissionLabel": "Low Emissions",
           "emissionLevel": "low"
@@ -268,13 +268,13 @@
           "label": "Minimalist Lifestyle",
           "impactValue": -0.2,
           "recommendationText": "Buying only what you need is the most powerful way to reduce your footprint.",
-          "image": "images/opt-minimalist.png",
+          "image": "opt-minimalist.png",
           "icon": "🧘",
           "emissionLabel": "Low Emissions",
           "emissionLevel": "low"
         }
       ],
-      "heroImage": "images/hero-shopping.png"
+      "heroImage": "hero-shopping.png"
     },
     {
       "id": "lifestyle",
@@ -287,7 +287,7 @@
           "label": "Frequent Streaming",
           "impactValue": 0.15,
           "recommendationText": "Stream on smaller screens or download via Wi-Fi to save data center energy.",
-          "image": "images/opt-streaming.png",
+          "image": "opt-streaming.png",
           "icon": "📺",
           "emissionLabel": "Low Emissions",
           "emissionLevel": "low"
@@ -297,7 +297,7 @@
           "label": "Large Cloud Storage Usage",
           "impactValue": 0.1,
           "recommendationText": "Delete old files and emails to reduce server power consumption.",
-          "image": "images/opt-cloud.png",
+          "image": "opt-cloud.png",
           "icon": "☁️",
           "emissionLabel": "Low Emissions",
           "emissionLevel": "low"
@@ -307,7 +307,7 @@
           "label": "New Phone Every Year",
           "impactValue": 0.1,
           "recommendationText": "Keep your phone for at least 3-4 years to offset its manufacturing footprint.",
-          "image": "images/opt-new-phone.png",
+          "image": "opt-new-phone.png",
           "icon": "✨",
           "emissionLabel": "Low Emissions",
           "emissionLevel": "low"
@@ -317,7 +317,7 @@
           "label": "Work From Home",
           "impactValue": -0.2,
           "recommendationText": "Working from home eliminates your commute emissions.",
-          "image": "images/opt-wfh.png",
+          "image": "opt-wfh.png",
           "icon": "💻",
           "emissionLabel": "Low Emissions",
           "emissionLevel": "low"
@@ -327,7 +327,7 @@
           "label": "Public Transport User",
           "impactValue": -0.1,
           "recommendationText": "Using public transport regularly is one of the best habits for the planet.",
-          "image": "images/opt-public-transport.png",
+          "image": "opt-public-transport.png",
           "icon": "🎫",
           "emissionLabel": "Low Emissions",
           "emissionLevel": "low"
@@ -337,13 +337,13 @@
           "label": "Eco Conscious Habits",
           "impactValue": -0.2,
           "recommendationText": "Keep spreading awareness! Your eco-friendly lifestyle makes a difference.",
-          "image": "images/opt-eco-conscious.png",
+          "image": "opt-eco-conscious.png",
           "icon": "🌍",
           "emissionLabel": "Low Emissions",
           "emissionLevel": "low"
         }
       ],
-      "heroImage": "images/hero-lifestyle.png"
+      "heroImage": "hero-lifestyle.png"
     }
   ]
 }

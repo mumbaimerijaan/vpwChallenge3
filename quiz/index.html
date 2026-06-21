@@ -13,7 +13,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
 </head>
 <body>
-    <div class="landing-wrapper">
+    <div class="landing-wrapper" data-bg-asset="landingBackground">
         <main class="content-container">
             <div class="hero-message">
                 <p class="small-text gsap-element">The Future Isn't Written.</p>
@@ -22,7 +22,7 @@
             </div>
 
             <div class="footprint-wrapper gsap-element">
-                <img src="images/footprint.png" alt="Footprint icon" class="floating-footprint">
+                <img data-asset="footprintIcon" alt="Footprint icon" class="floating-footprint">
             </div>
 
             <h1 class="main-title gsap-element">YOUR CARBON STORY</h1>
@@ -30,15 +30,15 @@
 
             <div class="journey-steps gsap-element">
                 <div class="step">
-                    <div class="badge"><img src="images/icon-brain.png" alt="Brain"></div>
+                    <div class="badge"><img data-asset="iconBrain" alt="Brain"></div>
                     <span>7 Awareness Questions</span>
                 </div>
                 <div class="step">
-                    <div class="badge"><img src="images/icon-footprint-small.png" alt="Footprint"></div>
+                    <div class="badge"><img data-asset="iconFootprintSmall" alt="Footprint"></div>
                     <span>Build Your Carbon Story</span>
                 </div>
                 <div class="step">
-                    <div class="badge"><img src="images/icon-leaf.png" alt="Leaf"></div>
+                    <div class="badge"><img data-asset="iconLeaf" alt="Leaf"></div>
                     <span>Explore a Better Future</span>
                 </div>
             </div>
@@ -49,6 +49,7 @@
         </main>
     </div>
 
+    <script src="../config/assets.js"></script>
     <script src="js/landing.js"></script>
 </body>
 </html>

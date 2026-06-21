@@ -22,25 +22,25 @@
         <!-- Video Backgrounds Layer -->
         <div id="video-layer">
             <div class="video-container active" data-scene="0">
-                <img src="images/initial-background.png" alt="Initial Background" class="bg-img">
+                <img data-asset="initialBackground" alt="Initial Background" class="bg-img">
             </div>
             <div class="video-container" data-scene="1">
-                <video src="videos/1850_Living Planet.mp4" muted playsinline preload="auto"></video>
+                <video data-asset="intro1850" muted playsinline preload="auto"></video>
             </div>
             <div class="video-container" data-scene="2">
-                <video src="videos/1900_Steam_Coal.mp4" muted playsinline preload="auto"></video>
+                <video data-asset="intro1900" muted playsinline preload="auto"></video>
             </div>
             <div class="video-container" data-scene="3">
-                <video src="videos/1950_Machine_Age.mp4" muted playsinline preload="auto"></video>
+                <video data-asset="intro1950" muted playsinline preload="auto"></video>
             </div>
             <div class="video-container" data-scene="4">
-                <video src="videos/2000_Connected_World.mp4" muted playsinline preload="auto"></video>
+                <video data-asset="intro2000" muted playsinline preload="auto"></video>
             </div>
             <div class="video-container" data-scene="5">
-                <video src="videos/2025_Consumption_Era.mp4" muted playsinline preload="auto"></video>
+                <video data-asset="intro2025" muted playsinline preload="auto"></video>
             </div>
             <div class="video-container" data-scene="6">
-                <video src="videos/The_Choice.mp4" muted playsinline preload="auto"></video>
+                <video data-asset="choice" muted playsinline preload="auto"></video>
             </div>
         </div>
 
@@ -107,7 +107,7 @@
 
             <!-- Scroll Prompt -->
             <div id="scroll-prompt">
-                <img src="images/mouse.png" alt="Scroll icon" class="mouse-icon">
+                <img data-asset="mouseIcon" alt="Scroll icon" class="mouse-icon">
                 <span class="scroll-text">SCROLL DOWN</span>
             </div>
 
@@ -115,6 +115,7 @@
 
     </main>
 
+    <script src="../config/assets.js"></script>
     <script src="js/main.js"></script>
 </body>
 </html>

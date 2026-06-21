@@ -1,7 +1,8 @@
-const CACHE_NAME = 'carbon-quiz-v1';
+const CACHE_NAME = 'carbon-quiz-v3';
 const STATIC_ASSETS = [
-  './',
   './index.html',
+  './css/landing.css',
+  './js/landing.js',
   './css/styles.css',
   './js/app.js',
   './js/quiz.js',
@@ -13,7 +14,10 @@ const STATIC_ASSETS = [
 self.addEventListener('install', (event) => {
   event.waitUntil(
     caches.open(CACHE_NAME).then((cache) => {
-      return cache.addAll(STATIC_ASSETS);
+      // Use Promise.allSettled or catch errors on individual files so one failure doesn't break the whole SW install
+      return Promise.all(STATIC_ASSETS.map(url => 
+        cache.add(url).catch(err => console.warn('Failed to cache:', url, err))
+      ));
     })
   );
   self.skipWaiting();
@@ -49,15 +53,13 @@ self.addEventListener('fetch', (event) => {
     );
   } else {
     event.respondWith(
-      caches.match(event.request).then((response) => {
-        return response || fetch(event.request).then((fetchResponse) => {
-           return caches.open(CACHE_NAME).then(cache => {
-             cache.put(event.request, fetchResponse.clone());
-             return fetchResponse;
-           });
+      fetch(event.request).then((fetchResponse) => {
+        return caches.open(CACHE_NAME).then(cache => {
+          cache.put(event.request, fetchResponse.clone());
+          return fetchResponse;
         });
       }).catch(() => {
-        // Ignore fallback for now
+        return caches.match(event.request);
       })
     );
   }

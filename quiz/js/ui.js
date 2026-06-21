@@ -33,14 +33,14 @@ window.QuizApp.UI = {
         // Card A
         $('#title-a, #back-title-a').text(q.optionA.title);
         $('#sub-a, #back-sub-a').text(q.optionA.subtitle);
-        $('#img-a').attr('src', q.optionA.image);
+        $('#img-a').attr('src', window.ASSETS.imageBase + q.optionA.image);
         $('#co2-a').text(q.optionA.co2);
         $('#desc-a').text(q.optionA.description);
         
         // Card B
         $('#title-b, #back-title-b').text(q.optionB.title);
         $('#sub-b, #back-sub-b').text(q.optionB.subtitle);
-        $('#img-b').attr('src', q.optionB.image);
+        $('#img-b').attr('src', window.ASSETS.imageBase + q.optionB.image);
         $('#co2-b').text(q.optionB.co2);
         $('#desc-b').text(q.optionB.description);
         
