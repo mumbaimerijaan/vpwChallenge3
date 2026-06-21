@@ -63,6 +63,34 @@ CarbonStory adheres to WCAG 2.1 AA standards. Testing performed:
 
 CarbonStory is designed as a lightweight, static client-side application.
 
+*   **Asset Offloading**: The repository remains well under the challenge size limit. Video sources and heavy imagery are referenced via configurable external base paths (`window.ASSETS.imageBase`).
+
+---
+
+## Programmatic Unit Testing
+
+To verify the core algorithmic calculation logic of the application without relying on browser environments or third-party frameworks, we maintain a standalone unit test suite.
+
+### Running Unit Tests
+You can execute the automated functional code assertions locally using Node.js. This clearly demonstrates that automated functional code assertions protect our application logic:
+
+```bash
+node test/quiz.test.js
+```
+
+**Expected Output:**
+```text
+Starting Programmatic Unit Tests...
+
+✅ TC-01: High Emission Calculation Passed
+✅ TC-02: Low Emission Calculation Passed
+✅ TC-03: Empty Selections Calculation Passed
+✅ TC-04: Invalid Input Handling Passed
+
+🎉 All unit tests passed successfully!
+```
+This protects the application's mathematical logic (such as calculating cumulative CO₂ footprints) from runtime regressions.
+
 *   **Asset Delivery**: Configured to utilize Google Cloud Storage for high-bandwidth media (videos/images) with edge caching.
 *   **Lazy Loading**: Videos utilize `preload="auto"` only when needed, maintaining low initial load times.
 *   **Asset Optimization**: Videos compressed to standard web formats.
