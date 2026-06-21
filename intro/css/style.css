@@ -229,6 +229,11 @@ body, html {
     opacity: 0; /* Hidden by default */
     transform: translateY(40px); /* Initial position for animation */
     pointer-events: none;
+    background: rgba(0,0,0,.35);
+    backdrop-filter: blur(2px);
+    border-radius: 12px;
+    padding: 1.5rem;
+    box-sizing: border-box;
 }
 
 .scene-text h2 {

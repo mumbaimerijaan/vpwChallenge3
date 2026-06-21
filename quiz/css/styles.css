@@ -326,3 +326,26 @@ body {
   #center-result { order: 2; margin: 1rem 0; }
   #scene-b { order: 3; }
 }
+
+/* Accessibility */
+:focus-visible {
+    outline: 3px solid #8b5cf6;
+    outline-offset: 4px;
+}
+.sr-only {
+    position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border-width: 0;
+}
+.skip-link {
+    position: absolute; top: -40px; left: 0; background: #8b5cf6; color: white; padding: 8px 16px; z-index: 9999; text-decoration: none; font-weight: bold; transition: top 0.2s;
+}
+.skip-link:focus, .skip-link:focus-visible {
+    top: 0; outline: 3px solid #ffffff; outline-offset: 2px;
+}
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+}

@@ -10,16 +10,17 @@
     <link rel="stylesheet" href="css/story.css">
 </head>
 <body>
-    <div class="hero-bg" id="hero-bg" data-bg-asset="heroTransport"></div>
-    <div class="gradient-overlay" id="gradient-overlay"></div>
+    <a href="#app-main" class="skip-link sr-only focus:not-sr-only">Skip to main content</a>
+    <div class="hero-bg" id="hero-bg" data-bg-asset="heroTransport" aria-hidden="true"></div>
+    <div class="gradient-overlay" id="gradient-overlay" aria-hidden="true"></div>
 
-    <main class="app-wrapper" id="app-main">
+    <main class="app-wrapper" id="app-main" role="main">
         <header class="top-nav">
             <div class="logo">
                 <span class="icon" style="color: var(--primary);">👣</span> Your Carbon Story
             </div>
-            <div class="nav-links">
-                <a href="#" class="active">Overview</a>
+            <div class="nav-links" aria-label="Main Navigation">
+                <a href="#" class="active" aria-current="page">Overview</a>
                 <a href="#">Actions</a>
                 <a href="#">Insights</a>
             </div>
@@ -39,6 +40,8 @@
                 </div>
             </div>
         </header>
+
+        <div id="story-announcer" aria-live="polite" class="sr-only"></div>
 
         <div id="story-container">
             <div class="content-split">
@@ -127,7 +130,7 @@
                             <!-- Comparison -->
                             <div class="compare-card glass-pane dark-theme" style="margin-bottom: 0;">
                                 <div class="globe-viz">
-                                    <img data-asset="globeIcon" alt="Globe" style="width: 100%; border-radius: 50%; box-shadow: 0 0 20px rgba(74, 144, 226, 0.4);">
+                                    <img data-asset="globeIcon" alt="3D illustrated globe representing global average emissions comparison" style="width: 100%; border-radius: 50%; box-shadow: 0 0 20px rgba(74, 144, 226, 0.4);">
                                 </div>
                                 <div class="compare-info">
                                     <h3>How do you compare?</h3>
@@ -200,14 +203,14 @@
             <div class="results-footer glass-pane">
                 <div class="footer-msg">
                     <div class="footer-icon-box">
-                        <img id="footer-icon" alt="Path" style="width: 40px; border-radius: 50%;">
+                        <img id="footer-icon" alt="Winding path representing a sustainable journey forward" style="width: 40px; border-radius: 50%;">
                     </div>
                     <div class="msg-text">
                         <strong>You're on the right path! <span style="font-size: 1.2rem;">🎉</span></strong>
                         <p>Keep going, keep growing. Every small step counts. <span style="font-size: 1.2rem;">👣</span></p>
                     </div>
                 </div>
-                <button id="btn-action-plan" class="btn-next">See My Action Plan &rarr;</button>
+                <button id="btn-action-plan" class="btn-next" aria-label="See My Action Plan">See My Action Plan &rarr;</button>
             </div>
             
         </section>
@@ -232,10 +235,10 @@
     </div>
 
     <!-- Modals -->
-    <div class="modal-overlay hidden" id="modal-impact">
+    <div class="modal-overlay hidden" id="modal-impact" role="dialog" aria-modal="true" aria-labelledby="modal-impact-title">
         <div class="modal-content glass-pane">
-            <button class="modal-close">&times;</button>
-            <h3 style="color: var(--primary); margin-bottom: 1rem;"><span class="icon">ℹ️</span> Emissions Averages</h3>
+            <button class="modal-close" aria-label="Close modal">&times;</button>
+            <h3 id="modal-impact-title" style="color: var(--primary); margin-bottom: 1rem;"><span class="icon" aria-hidden="true">ℹ️</span> Emissions Averages</h3>
             <div style="margin-bottom: 1.5rem;">
                 <p style="font-weight: 600; color: var(--text-dark); margin-bottom: 0.5rem;"><span style="font-size: 1.2rem;">🌍</span> Global Average</p>
                 <p style="color: var(--text-light); font-size: 0.9rem;">4.7 tonnes CO₂e per person annually.</p>
@@ -247,10 +250,10 @@
         </div>
     </div>
 
-    <div class="modal-overlay hidden" id="modal-recs">
+    <div class="modal-overlay hidden" id="modal-recs" role="dialog" aria-modal="true" aria-labelledby="modal-recs-title">
         <div class="modal-content glass-pane" style="max-width: 500px; width: 90%;">
-            <button class="modal-close">&times;</button>
-            <h3 style="color: var(--primary); margin-bottom: 1rem;"><span class="icon">🍃</span> All Recommendations</h3>
+            <button class="modal-close" aria-label="Close modal">&times;</button>
+            <h3 id="modal-recs-title" style="color: var(--primary); margin-bottom: 1rem;"><span class="icon" aria-hidden="true">🍃</span> All Recommendations</h3>
             <div class="vertical-recs">
                 <div class="rec-item-horiz" style="flex-direction: row; align-items: center;">
                     <div class="rec-icon-horiz" style="background: #8070FF20; color: #8070FF">🚆</div>

@@ -25,5 +25,11 @@ window.navigateApp = function(page) {
 window.addEventListener("message", function(e) {
     if (e.data && e.data.type === "navigate" && e.data.target) {
         window.navigateApp(e.data.target);
+    } else if (e.data && e.data.type === "announce" && e.data.message) {
+        const announcer = document.getElementById('global-announcer');
+        if (announcer) {
+            announcer.textContent = ''; // clear first
+            setTimeout(() => { announcer.textContent = e.data.message; }, 50); // set after short delay to ensure announcement
+        }
     }
 });

@@ -42,6 +42,16 @@ $(document).ready(function() {
         }
     }, { passive: false });
 
+    // Keyboard support (Space, Enter, Down Arrow)
+    window.addEventListener('keydown', (e) => {
+        if (e.code === 'Space' || e.code === 'Enter' || e.code === 'ArrowDown') {
+            if (currentScene < totalScenes) {
+                e.preventDefault();
+                triggerNextScene();
+            }
+        }
+    });
+
     function handleScroll(e) {
         e.preventDefault(); // Prevent native scroll
         if (e.deltaY > 0) {
@@ -60,6 +70,17 @@ $(document).ready(function() {
     function advanceToScene(nextScene) {
         isTransitioning = true;
         $scrollPrompt.css('opacity', '0'); // Hide scroll prompt during transition
+
+        const sceneTitles = {
+            1: "Living Planet",
+            2: "Steam and Coal",
+            3: "Machine Age",
+            4: "Connected World",
+            5: "The Consumption Era",
+            6: "The Choice"
+        };
+        const announcement = nextScene === 6 ? "Current era: The Choice" : `Current era: ${years[nextScene]} ${sceneTitles[nextScene]}`;
+        window.parent.postMessage({ type: "announce", message: announcement }, "*");
 
         const prevScene = currentScene; // Capture the current scene before it gets updated
         const $currentBg = $(`.video-container[data-scene="${prevScene}"]`);
@@ -139,20 +160,35 @@ $(document).ready(function() {
 
             // Ensure video plays from beginning
             video.currentTime = 0;
-            video.play().catch(err => console.log("Video play error:", err));
-
-            // Listen for end
-            video.onended = () => {
+            
+            const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+            
+            if (prefersReducedMotion) {
+                // Pause video immediately to show just the first frame
+                video.pause();
                 isVideoPlaying = false;
                 
                 if (sceneIndex < totalScenes) {
-                    // Show scroll prompt to advance
                     gsap.to($scrollPrompt, { opacity: 1, duration: 0.5 });
                 } else {
-                    // Final Scene (6) - Show CTA
                     showFinalCTA();
                 }
-            };
+            } else {
+                video.play().catch(err => console.log("Video play error:", err));
+
+                // Listen for end
+                video.onended = () => {
+                    isVideoPlaying = false;
+                    
+                    if (sceneIndex < totalScenes) {
+                        // Show scroll prompt to advance
+                        gsap.to($scrollPrompt, { opacity: 1, duration: 0.5 });
+                    } else {
+                        // Final Scene (6) - Show CTA
+                        showFinalCTA();
+                    }
+                };
+            }
         } else {
             // Failsafe if no video exists
             isTransitioning = false;

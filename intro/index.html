@@ -19,28 +19,42 @@
     <!-- Main Container -->
     <main id="intro-container">
 
-        <!-- Video Backgrounds Layer -->
         <div id="video-layer">
             <div class="video-container active" data-scene="0">
-                <img data-asset="initialBackground" alt="Initial Background" class="bg-img">
+                <img data-asset="initialBackground" alt="" aria-hidden="true" class="bg-img">
             </div>
             <div class="video-container" data-scene="1">
-                <video data-asset="intro1850" muted playsinline preload="auto"></video>
+                <video data-asset="intro1850" muted playsinline preload="auto" aria-label="1850 Living Planet timeline video showing a thriving natural world" aria-describedby="desc-1850">
+                    <track kind="captions">
+                </video>
+                <div id="desc-1850" class="sr-only">1850 Living Planet. A world in balance before large scale industrialization.</div>
             </div>
             <div class="video-container" data-scene="2">
-                <video data-asset="intro1900" muted playsinline preload="auto"></video>
+                <video data-asset="intro1900" muted playsinline preload="auto" aria-label="1900 Steam & Coal timeline video showing industrialization" aria-describedby="desc-1900">
+                    <track kind="captions">
+                </video>
+                <div id="desc-1900" class="sr-only">1900 Steam and Coal. Industrialization accelerated growth, powered by coal and steam.</div>
             </div>
             <div class="video-container" data-scene="3">
-                <video data-asset="intro1950" muted playsinline preload="auto"></video>
+                <video data-asset="intro1950" muted playsinline preload="auto" aria-label="1950 Machine Age timeline video showing factories and automobiles" aria-describedby="desc-1950">
+                    <track kind="captions">
+                </video>
+                <div id="desc-1950" class="sr-only">1950 Machine Age. Factories, automobiles and mass production transformed daily life.</div>
             </div>
             <div class="video-container" data-scene="4">
-                <video data-asset="intro2000" muted playsinline preload="auto"></video>
+                <video data-asset="intro2000" muted playsinline preload="auto" aria-label="2000 Connected World timeline video showing global trade and networks" aria-describedby="desc-2000">
+                    <track kind="captions">
+                </video>
+                <div id="desc-2000" class="sr-only">2000 Connected World. Global trade, digital networks and rapid transportation connected billions.</div>
             </div>
             <div class="video-container" data-scene="5">
-                <video data-asset="intro2025" muted playsinline preload="auto"></video>
+                <video data-asset="intro2025" muted playsinline preload="auto" aria-label="2025 The Consumption Era timeline video showing modern pressure on the planet" aria-describedby="desc-2025">
+                    <track kind="captions">
+                </video>
+                <div id="desc-2025" class="sr-only">2025 The Consumption Era. Instant delivery, constant connectivity and growing demand place unprecedented pressure on the planet.</div>
             </div>
             <div class="video-container" data-scene="6">
-                <video data-asset="choice" muted playsinline preload="auto"></video>
+                <video data-asset="choice" muted playsinline preload="auto" aria-hidden="true"></video>
             </div>
         </div>
 
@@ -48,7 +62,7 @@
         <div id="ui-layer">
 
             <!-- Opening Scene -->
-            <div class="scene-content active" id="scene-0">
+            <section class="scene-content active" id="scene-0">
                 <div class="opening-text">
                     <h1>
                         <span class="line-1">READY TO SEE</span>
@@ -62,7 +76,7 @@
                     </div>
                     <p>Journey through time.<br>See how our choices shaped the world we live in today.</p>
                 </div>
-            </div>
+            </section>
 
             <!-- Global Top Left Year -->
             <div id="year-counter" style="opacity: 0;">
@@ -70,45 +84,45 @@
             </div>
 
             <!-- Scene Text Elements -->
-            <div class="scene-text-container">
+            <div class="scene-text-container" aria-live="polite">
                 <!-- Scenes 1-6 will dynamically fade text here -->
-                <div class="scene-text" id="text-scene-1">
+                <section class="scene-text" id="text-scene-1">
                     <h2>LIVING PLANET</h2>
                     <p>Forests, rivers and oceans sustained a delicate balance. Human impact existed, but nature still dominated the planet.</p>
-                </div>
-                <div class="scene-text" id="text-scene-2">
+                </section>
+                <section class="scene-text" id="text-scene-2">
                     <h2>STEAM & COAL</h2>
                     <p>Industrialization accelerated growth, powered by coal and steam. Cities expanded and emissions began to rise.</p>
-                </div>
-                <div class="scene-text" id="text-scene-3">
+                </section>
+                <section class="scene-text" id="text-scene-3">
                     <h2>MACHINE AGE</h2>
                     <p>Factories, automobiles and mass production transformed daily life, increasing energy demand across the world.</p>
-                </div>
-                <div class="scene-text" id="text-scene-4">
+                </section>
+                <section class="scene-text" id="text-scene-4">
                     <h2>CONNECTED WORLD</h2>
                     <p>Global trade, digital networks and rapid transportation connected billions, bringing convenience and higher consumption.</p>
-                </div>
-                <div class="scene-text" id="text-scene-5">
+                </section>
+                <section class="scene-text" id="text-scene-5">
                     <h2>THE CONSUMPTION ERA</h2>
                     <p>Instant delivery, constant connectivity and growing demand place unprecedented pressure on the planet.</p>
-                </div>
-                <div class="scene-text" id="text-scene-6">
+                </section>
+                <section class="scene-text" id="text-scene-6">
                     <h2>THE CHOICE</h2>
                     <p>The future is not fixed. The choices we make today determine the world we leave behind tomorrow.</p>
-                </div>
+                </section>
             </div>
 
             <!-- Final CTA (Hidden until end) -->
             <div id="final-cta" style="opacity: 0; pointer-events: none;">
                 <h2>The Future Is Not Fixed</h2>
                 <p>Small choices today.<br>Massive impact tomorrow.</p>
-                <button id="btn-begin">BEGIN YOUR JOURNEY</button>
+                <button id="btn-begin" aria-label="Begin Your Journey">BEGIN YOUR JOURNEY</button>
             </div>
 
             <!-- Scroll Prompt -->
-            <div id="scroll-prompt">
-                <img data-asset="mouseIcon" alt="Scroll icon" class="mouse-icon">
-                <span class="scroll-text">SCROLL DOWN</span>
+            <div id="scroll-prompt" aria-hidden="true">
+                <img data-asset="mouseIcon" alt="" aria-hidden="true" class="mouse-icon">
+                <span class="scroll-text">SCROLL DOWN OR PRESS SPACE</span>
             </div>
 
         </div>

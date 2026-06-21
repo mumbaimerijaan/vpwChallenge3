@@ -70,15 +70,15 @@ window.StoryApp = {
             const emissionIcon = emissionClass === 'high' ? '☁️' : '🍃';
             
             cardsHtml += `
-                <div class="opt-card ${isSelected ? 'selected' : ''}" data-id="${opt.id}">
-                    <div class="card-img-box">
-                        <img class="card-img" src="${imagePath}" alt="${opt.label}">
+                <div class="opt-card ${isSelected ? 'selected' : ''}" data-id="${opt.id}" role="button" tabindex="0" aria-pressed="${isSelected ? 'true' : 'false'}">
+                    <div class="card-img-box" aria-hidden="true">
+                        <img class="card-img" src="${imagePath}" alt="">
                         <div class="check-circle">✓</div>
                     </div>
                     <div class="card-body">
                         <div class="card-title">${opt.label}</div>
                         <div class="emission-pill ${emissionClass}">
-                            <span class="icon">${emissionIcon}</span> ${opt.emissionLabel}
+                            <span class="icon" aria-hidden="true">${emissionIcon}</span> ${opt.emissionLabel}
                         </div>
                     </div>
                 </div>
@@ -96,6 +96,9 @@ window.StoryApp = {
         // Attach Card Events
         $('.opt-card').off('click').on('click', function() {
             $(this).toggleClass('selected');
+            const isSel = $(this).hasClass('selected');
+            $(this).attr('aria-pressed', isSel ? 'true' : 'false');
+            
             const optId = $(this).data('id');
             const secId = section.id;
             
@@ -103,7 +106,7 @@ window.StoryApp = {
                 window.StoryApp.selections[secId] = [];
             }
             
-            if ($(this).hasClass('selected')) {
+            if (isSel) {
                 window.StoryApp.selections[secId].push(optId);
             } else {
                 window.StoryApp.selections[secId] = window.StoryApp.selections[secId].filter(id => id !== optId);
@@ -111,6 +114,20 @@ window.StoryApp = {
             
             window.StoryApp.updateFooterCount();
         });
+
+        // Keyboard Support for Cards
+        $('.opt-card').off('keydown').on('keydown', function(e) {
+            if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                $(this).click();
+            }
+        });
+
+        // Announce current step
+        const announcer = document.getElementById('story-announcer');
+        if (announcer) {
+            announcer.textContent = `Step ${this.currentStepIndex + 1} of ${this.data.length}: ${section.title}. ${section.question}`;
+        }
     },
 
     updateFooterCount: function() {
@@ -295,6 +312,12 @@ window.StoryApp = {
 
         $('#results-container').removeClass('hidden');
         window.scrollTo(0, 0);
+
+        // Announce Results
+        const announcer = document.getElementById('story-announcer');
+        if (announcer) {
+            announcer.textContent = `Results generated. Your total annual emissions are ${totalImpact.toFixed(1)} tonnes. Impact is ${totalImpact <= avg ? 'Low' : 'High'}.`;
+        }
     }
 };
 

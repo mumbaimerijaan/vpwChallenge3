@@ -21,14 +21,15 @@
         <div class="particle p-3"></div>
     </div>
 
-    <main class="app-container">
+    <a href="#main-content" class="skip-link sr-only focus:not-sr-only">Skip to main content</a>
+    <main id="main-content" class="app-container" role="main">
         <!-- Header -->
-        <header class="top-bar">
+        <header class="top-bar" role="banner">
             <div class="progress-pill glass">
                 <span class="icon">✨</span> <span id="progress-text">Q1 of 3</span>
             </div>
             
-            <div class="progress-bar-container">
+            <div class="progress-bar-container" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="33" id="progress-container">
                 <div class="progress-track">
                     <div class="progress-fill" id="progress-bar" style="width: 33%"></div>
                 </div>
@@ -38,10 +39,12 @@
                 <span class="icon">🍃</span> 
                 <div class="score-text">
                     <small>Awareness Score</small>
-                    <div class="score-value"><span id="score-val">0</span> / <span id="score-total">3</span></div>
+                    <div class="score-value" aria-live="polite"><span id="score-val">0</span> / <span id="score-total">3</span></div>
                 </div>
             </div>
         </header>
+
+        <div id="quiz-announcer" aria-live="polite" class="sr-only"></div>
 
         <!-- Question Section -->
         <section class="question-section" id="question-container">
@@ -65,7 +68,7 @@
         <!-- Cards Section -->
         <section class="cards-section" id="cards-container">
             <!-- Option A -->
-            <div class="card-scene" id="scene-a" data-option="A">
+            <div class="card-scene" id="scene-a" data-option="A" role="button" tabindex="0" aria-pressed="false" aria-label="Option A">
                 <div class="card glass-card" id="card-a">
                     <div class="card-face card-front">
                         <div class="card-image-wrap">
@@ -107,7 +110,7 @@
             </div>
 
             <!-- Option B -->
-            <div class="card-scene" id="scene-b" data-option="B">
+            <div class="card-scene" id="scene-b" data-option="B" role="button" tabindex="0" aria-pressed="false" aria-label="Option B">
                 <div class="card glass-card" id="card-b">
                     <div class="card-face card-front">
                         <div class="card-image-wrap">
@@ -140,9 +143,9 @@
         </section>
 
         <!-- Footer -->
-        <footer class="footer-actions">
+        <footer class="footer-actions" role="contentinfo">
             <p class="lock-text" id="lock-text"><span class="icon">🔒</span> Confirm your choice to see the results</p>
-            <button class="btn-next hidden" id="btn-next">Next Question →</button>
+            <button class="btn-next hidden" id="btn-next" aria-label="Next Question">Next Question →</button>
         </footer>
     </main>
 

@@ -22,7 +22,9 @@ window.QuizApp.UI = {
         
         // Update Header
         $('#progress-text').text(`Q${state.currentIndex + 1} of ${total}`);
-        $('#progress-bar').css('width', `${((state.currentIndex) / total) * 100}%`);
+        const progressPercent = ((state.currentIndex) / total) * 100;
+        $('#progress-bar').css('width', `${progressPercent}%`);
+        $('#progress-container').attr('aria-valuenow', Math.round(progressPercent));
         $('#score-val').text(state.score);
         $('#score-total').text(total);
         
@@ -33,16 +35,26 @@ window.QuizApp.UI = {
         // Card A
         $('#title-a, #back-title-a').text(q.optionA.title);
         $('#sub-a, #back-sub-a').text(q.optionA.subtitle);
-        $('#img-a').attr('src', window.ASSETS.imageBase + q.optionA.image);
+        $('#img-a').attr('src', window.ASSETS.imageBase + q.optionA.image).attr('alt', q.optionA.title);
         $('#co2-a').text(q.optionA.co2);
         $('#desc-a').text(q.optionA.description);
         
         // Card B
         $('#title-b, #back-title-b').text(q.optionB.title);
         $('#sub-b, #back-sub-b').text(q.optionB.subtitle);
-        $('#img-b').attr('src', window.ASSETS.imageBase + q.optionB.image);
+        $('#img-b').attr('src', window.ASSETS.imageBase + q.optionB.image).attr('alt', q.optionB.title);
         $('#co2-b').text(q.optionB.co2);
         $('#desc-b').text(q.optionB.description);
+
+        // Accessibility attributes and announcements
+        $('#scene-a').attr('aria-label', `Option A: ${q.optionA.title}`).attr('aria-pressed', 'false');
+        $('#scene-b').attr('aria-label', `Option B: ${q.optionB.title}`).attr('aria-pressed', 'false');
+        
+        // Announce question to screen readers
+        const announcer = document.getElementById('quiz-announcer');
+        if (announcer) {
+            announcer.textContent = `Question ${state.currentIndex + 1} of ${total}: ${q.question}. ${q.subtitle || ''}`;
+        }
         
         this.renderClouds('cloud-a', q.optionA.co2);
         this.renderClouds('cloud-b', q.optionB.co2);
@@ -75,6 +87,14 @@ window.QuizApp.UI = {
             const opt = $(this).data('option');
             if (window.QuizApp.State.selectedOption === opt) return; // Already selected
             window.QuizApp.UI.selectOption(opt);
+        });
+
+        // Keyboard support for cards
+        $('.card-scene').on('keydown', function(e) {
+            if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                $(this).click();
+            }
         });
         
         $('.btn-confirm').on('click', function(e) {
@@ -113,8 +133,12 @@ window.QuizApp.UI = {
         
         if (opt === 'A') {
             cardA.addClass('flipped');
+            $('#scene-a').attr('aria-pressed', 'true');
+            $('#scene-b').attr('aria-pressed', 'false');
         } else {
             cardB.addClass('flipped');
+            $('#scene-b').attr('aria-pressed', 'true');
+            $('#scene-a').attr('aria-pressed', 'false');
         }
     },
     
@@ -155,6 +179,12 @@ window.QuizApp.UI = {
         $('#center-heading').text(isCorrect ? 'Correct!' : 'Not Quite!');
         $('#center-icon').text(isCorrect ? '🌟' : '🍃');
         $('#center-fact').text(q.fact);
+
+        // Announce outcome
+        const announcer = document.getElementById('quiz-announcer');
+        if (announcer) {
+            announcer.textContent = `${isCorrect ? 'Correct!' : 'Not Quite!'} ${q.fact}`;
+        }
         
         // Show next button
         $('#lock-text').addClass('hidden');
@@ -163,7 +193,9 @@ window.QuizApp.UI = {
         // Update header score immediately
         const total = window.QuizApp.Data.getTotalQuestions();
         $('#score-val').text(window.QuizApp.State.score);
-        $('#progress-bar').css('width', `${((window.QuizApp.State.currentIndex + 1) / total) * 100}%`);
+        const progressPercent = ((window.QuizApp.State.currentIndex + 1) / total) * 100;
+        $('#progress-bar').css('width', `${progressPercent}%`);
+        $('#progress-container').attr('aria-valuenow', Math.round(progressPercent));
     },
 
     showSummary: function() {
@@ -179,5 +211,11 @@ window.QuizApp.UI = {
         const percent = Math.round((score / total) * 100);
         
         $('#final-percentage').text(`${percent}%`);
+
+        // Announce final score
+        const announcer = document.getElementById('quiz-announcer');
+        if (announcer) {
+            announcer.textContent = `Challenge Complete! Your Carbon Awareness Score is ${percent} percent.`;
+        }
     }
 };

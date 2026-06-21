@@ -13,8 +13,9 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
 </head>
 <body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
     <div class="landing-wrapper" data-bg-asset="landingBackground">
-        <main class="content-container">
+        <main id="main-content" class="content-container" role="main">
             <div class="hero-message">
                 <p class="small-text gsap-element">The Future Isn't Written.</p>
                 <p class="subtitle gsap-element">It's shaped by millions of everyday choices.</p>
@@ -22,7 +23,7 @@
             </div>
 
             <div class="footprint-wrapper gsap-element">
-                <img data-asset="footprintIcon" alt="Footprint icon" class="floating-footprint">
+                <img data-asset="footprintIcon" alt="A large glowing carbon footprint" class="floating-footprint">
             </div>
 
             <h1 class="main-title gsap-element">YOUR CARBON STORY</h1>
@@ -30,21 +31,21 @@
 
             <div class="journey-steps gsap-element">
                 <div class="step">
-                    <div class="badge"><img data-asset="iconBrain" alt="Brain"></div>
+                    <div class="badge" aria-hidden="true"><img data-asset="iconBrain" alt=""></div>
                     <span>7 Awareness Questions</span>
                 </div>
                 <div class="step">
-                    <div class="badge"><img data-asset="iconFootprintSmall" alt="Footprint"></div>
+                    <div class="badge" aria-hidden="true"><img data-asset="iconFootprintSmall" alt=""></div>
                     <span>Build Your Carbon Story</span>
                 </div>
                 <div class="step">
-                    <div class="badge"><img data-asset="iconLeaf" alt="Leaf"></div>
+                    <div class="badge" aria-hidden="true"><img data-asset="iconLeaf" alt=""></div>
                     <span>Explore a Better Future</span>
                 </div>
             </div>
 
             <div class="cta-wrapper gsap-element">
-                <button id="btn-begin" class="btn-primary">BEGIN JOURNEY &rarr;</button>
+                <button id="btn-begin" class="btn-primary" aria-label="Begin Your Journey">BEGIN JOURNEY &rarr;</button>
             </div>
         </main>
     </div>

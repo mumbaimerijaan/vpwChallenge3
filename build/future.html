@@ -11,9 +11,10 @@
     <link rel="stylesheet" href="css/future.css">
 </head>
 <body>
-    <main class="app-wrapper future-mode">
-        <header class="top-nav future-nav">
-            <div style="width: 100px;"></div> <!-- Placeholder to balance flex -->
+    <a href="#main-content" class="skip-link sr-only focus:not-sr-only">Skip to main content</a>
+    <main id="main-content" class="app-wrapper future-mode" role="main">
+        <header class="top-nav future-nav" role="banner">
+            <div style="width: 100px;" aria-hidden="true"></div> <!-- Placeholder to balance flex -->
             <div class="main-title">
                 <h1>Your Better Future <span class="footprint">👣</span></h1>
                 <p id="main-subtitle">Small changes today. Massive impact tomorrow.</p>
@@ -22,10 +23,10 @@
         </header>
 
         <section class="future-hero-section">
-            <div class="hero-bg-img" data-bg-asset="heroFinal"></div>
+            <div class="hero-bg-img" data-bg-asset="heroFinal" aria-hidden="true"></div>
             <div class="hero-image-container">
                 <!-- Center Divider -->
-                <div class="center-divider">
+                <div class="center-divider" aria-hidden="true">
                     <div class="glow-line"></div>
                     <div class="center-circle">
                         <span class="footprint green-footprint">👣</span>
@@ -127,7 +128,7 @@
                     <button id="btn-explore-again" class="btn-next btn-explore">Explore Again &rarr;</button>
                 </div>
                 <div class="final-earth-viz">
-                    <img data-asset="earthHeartIcon" alt="Earth" class="earth-float">
+                    <img data-asset="earthHeartIcon" alt="" aria-hidden="true" class="earth-float">
                 </div>
             </div>
         </section>
