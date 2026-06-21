@@ -1,0 +1,42 @@
+html, body {
+    margin: 0;
+    padding: 0;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    background-color: #000;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+#app-frame {
+    width: 100vw;
+    height: 100vh;
+    border: none;
+    position: fixed;
+    inset: 0;
+    opacity: 1;
+    transition: opacity 300ms ease;
+    background-color: #000;
+}
+
+#app-frame.fade-out {
+    opacity: 0;
+}
+
+#error-overlay {
+    position: fixed;
+    inset: 0;
+    background-color: #111;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    text-align: center;
+    font-size: 1.2rem;
+    line-height: 1.5;
+}
+
+.hidden {
+    display: none !important;
+}

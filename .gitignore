@@ -1,0 +1,38 @@
+# Videos
+*.mp4
+*.webm
+*.mov
+*.avi
+
+# Images
+*.png
+*.jpg
+*.jpeg
+*.gif
+*.webp
+*.svg
+
+# Asset folders
+intro/videos/
+intro/images/
+quiz/images/
+build/images/
+assets/
+
+# Node
+node_modules/
+
+# Logs
+*.log
+
+# OS Files
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+
+# Build
+dist/
+build-output/

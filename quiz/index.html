@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carbon Awareness Challenge - Your Journey</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/landing.css">
+    
+    <!-- GSAP -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+</head>
+<body>
+    <div class="landing-wrapper">
+        <main class="content-container">
+            <div class="hero-message">
+                <p class="small-text gsap-element">The Future Isn't Written.</p>
+                <p class="subtitle gsap-element">It's shaped by millions of everyday choices.</p>
+                <p class="question gsap-element">But how much impact do <span class="emphasis">YOUR</span> choices really have?</p>
+            </div>
+
+            <div class="footprint-wrapper gsap-element">
+                <img src="images/footprint.png" alt="Footprint icon" class="floating-footprint">
+            </div>
+
+            <h1 class="main-title gsap-element">YOUR CARBON STORY</h1>
+            <p class="description gsap-element">Answer a few questions and discover the impact of your everyday choices.</p>
+
+            <div class="journey-steps gsap-element">
+                <div class="step">
+                    <div class="badge"><img src="images/icon-brain.png" alt="Brain"></div>
+                    <span>7 Awareness Questions</span>
+                </div>
+                <div class="step">
+                    <div class="badge"><img src="images/icon-footprint-small.png" alt="Footprint"></div>
+                    <span>Build Your Carbon Story</span>
+                </div>
+                <div class="step">
+                    <div class="badge"><img src="images/icon-leaf.png" alt="Leaf"></div>
+                    <span>Explore a Better Future</span>
+                </div>
+            </div>
+
+            <div class="cta-wrapper gsap-element">
+                <button id="btn-begin" class="btn-primary">BEGIN JOURNEY &rarr;</button>
+            </div>
+        </main>
+    </div>
+
+    <script src="js/landing.js"></script>
+</body>
+</html>

@@ -1,0 +1,324 @@
+{
+  "questions": [
+    {
+      "id": 1,
+      "question": "Which produces more CO₂?",
+      "subtitle": "for the same 20 km journey",
+      "optionA": {
+        "title": "Car Trip",
+        "subtitle": "20 km",
+        "image": "images/q1-a.png",
+        "co2": "2.8 kg CO₂",
+        "description": "Car travel emits significantly more carbon."
+      },
+      "optionB": {
+        "title": "Train Trip",
+        "subtitle": "20 km",
+        "image": "images/q1-b.png",
+        "co2": "0.4 kg CO₂",
+        "description": "Rail travel is more carbon efficient."
+      },
+      "correct": "A",
+      "fact": "A car emits roughly 7x more CO₂ than rail travel for the same journey."
+    },
+    {
+      "id": 2,
+      "question": "Which emits more CO₂?",
+      "subtitle": "Mumbai–Delhi Route",
+      "optionA": {
+        "title": "Flight",
+        "subtitle": "Mumbai–Delhi",
+        "image": "images/q2-a.png",
+        "co2": "130 kg CO₂",
+        "description": "Aviation is highly carbon intensive per passenger."
+      },
+      "optionB": {
+        "title": "Train",
+        "subtitle": "Mumbai–Delhi",
+        "image": "images/q2-b.png",
+        "co2": "20 kg CO₂",
+        "description": "Long distance rail travel is very efficient."
+      },
+      "correct": "A",
+      "fact": "Domestic flights emit significantly more CO₂ per passenger than rail travel."
+    },
+    {
+      "id": 3,
+      "question": "Which emits more CO₂?",
+      "subtitle": "Daily Commute",
+      "optionA": {
+        "title": "Solo Commute",
+        "subtitle": "Driving alone",
+        "image": "images/q3-a.png",
+        "co2": "3.5 kg CO₂",
+        "description": "One person absorbing all emissions."
+      },
+      "optionB": {
+        "title": "Carpool",
+        "subtitle": "4 people sharing",
+        "image": "images/q3-b.png",
+        "co2": "0.9 kg CO₂",
+        "description": "Emissions divided by four passengers."
+      },
+      "correct": "A",
+      "fact": "Sharing rides reduces emissions per passenger significantly."
+    },
+    {
+      "id": 4,
+      "question": "Which emits more CO₂?",
+      "subtitle": "City Commute",
+      "optionA": {
+        "title": "Petrol Scooter",
+        "subtitle": "Daily ride",
+        "image": "images/q4-a.png",
+        "co2": "1.2 kg CO₂",
+        "description": "Two-wheelers emit less than cars but more than transit."
+      },
+      "optionB": {
+        "title": "Metro Train",
+        "subtitle": "Public transit",
+        "image": "images/q4-b.png",
+        "co2": "0.2 kg CO₂",
+        "description": "Highly efficient electric mass transit."
+      },
+      "correct": "A",
+      "fact": "Mass transit dramatically reduces emissions per passenger."
+    },
+    {
+      "id": 5,
+      "question": "Which emits more CO₂?",
+      "subtitle": "For 8 Hours",
+      "optionA": {
+        "title": "AC Running",
+        "subtitle": "8 Hours",
+        "image": "images/q5-a.png",
+        "co2": "6.0 kg CO₂",
+        "description": "High power consumption for cooling."
+      },
+      "optionB": {
+        "title": "Ceiling Fan",
+        "subtitle": "8 Hours",
+        "image": "images/q5-b.png",
+        "co2": "0.4 kg CO₂",
+        "description": "Very low power consumption."
+      },
+      "correct": "A",
+      "fact": "Air conditioners consume significantly more electricity than fans."
+    },
+    {
+      "id": 6,
+      "question": "Which emits more CO₂?",
+      "subtitle": "Lighting",
+      "optionA": {
+        "title": "Incandescent",
+        "subtitle": "Traditional Bulb",
+        "image": "images/q6-a.png",
+        "co2": "0.8 kg CO₂",
+        "description": "Wastes most energy as heat."
+      },
+      "optionB": {
+        "title": "LED Bulb",
+        "subtitle": "Modern Lighting",
+        "image": "images/q6-b.png",
+        "co2": "0.1 kg CO₂",
+        "description": "Highly energy efficient."
+      },
+      "correct": "A",
+      "fact": "LED bulbs use far less electricity and last much longer."
+    },
+    {
+      "id": 7,
+      "question": "Which emits more CO₂?",
+      "subtitle": "Bathing",
+      "optionA": {
+        "title": "Electric Geyser",
+        "subtitle": "Daily use",
+        "image": "images/q7-a.png",
+        "co2": "1.5 kg CO₂",
+        "description": "Heating large volumes of water requires high energy."
+      },
+      "optionB": {
+        "title": "Bucket Bath",
+        "subtitle": "Ambient or sun-heated",
+        "image": "images/q7-b.png",
+        "co2": "0.1 kg CO₂",
+        "description": "Saves water and energy."
+      },
+      "correct": "A",
+      "fact": "Heating water electrically is very energy intensive."
+    },
+    {
+      "id": 8,
+      "question": "Which emits more CO₂?",
+      "subtitle": "Diet Choice",
+      "optionA": {
+        "title": "Mutton Meal",
+        "subtitle": "Red meat",
+        "image": "images/q8-a.png",
+        "co2": "4.5 kg CO₂",
+        "description": "Livestock farming produces high methane and CO2."
+      },
+      "optionB": {
+        "title": "Dal Meal",
+        "subtitle": "Plant-based",
+        "image": "images/q8-b.png",
+        "co2": "0.5 kg CO₂",
+        "description": "Lentils and grains have a very low footprint."
+      },
+      "correct": "A",
+      "fact": "Red meat has a much higher carbon footprint than plant-based meals."
+    },
+    {
+      "id": 9,
+      "question": "Which emits more CO₂?",
+      "subtitle": "Fruit Choice",
+      "optionA": {
+        "title": "Imported Apples",
+        "subtitle": "Flown in",
+        "image": "images/q9-a.png",
+        "co2": "2.0 kg CO₂",
+        "description": "High air miles and cold storage."
+      },
+      "optionB": {
+        "title": "Local Fruit",
+        "subtitle": "Seasonal",
+        "image": "images/q9-b.png",
+        "co2": "0.2 kg CO₂",
+        "description": "Grown nearby, requiring less transport."
+      },
+      "correct": "A",
+      "fact": "Transport and long-term cold storage increase emissions."
+    },
+    {
+      "id": 10,
+      "question": "Which emits more CO₂?",
+      "subtitle": "Dinner",
+      "optionA": {
+        "title": "Food Delivery",
+        "subtitle": "App order",
+        "image": "images/q10-a.png",
+        "co2": "1.2 kg CO₂",
+        "description": "Delivery logistics and packaging add up."
+      },
+      "optionB": {
+        "title": "Home Cooked",
+        "subtitle": "Family meal",
+        "image": "images/q10-b.png",
+        "co2": "0.4 kg CO₂",
+        "description": "Bulk ingredients and no plastic packaging."
+      },
+      "correct": "A",
+      "fact": "Delivery logistics and single-use packaging add extra emissions."
+    },
+    {
+      "id": 11,
+      "question": "Which emits more CO₂?",
+      "subtitle": "Clothing",
+      "optionA": {
+        "title": "Fast Fashion",
+        "subtitle": "Buying new",
+        "image": "images/q11-a.png",
+        "co2": "15.0 kg CO₂",
+        "description": "Manufacturing and shipping new garments is intensive."
+      },
+      "optionB": {
+        "title": "Reusing",
+        "subtitle": "Existing clothes",
+        "image": "images/q11-b.png",
+        "co2": "0.0 kg CO₂ saved",
+        "description": "Extending the life of garments has zero new emissions."
+      },
+      "correct": "A",
+      "fact": "The fashion industry has a major environmental impact."
+    },
+    {
+      "id": 12,
+      "question": "Which emits more CO₂?",
+      "subtitle": "Electronics",
+      "optionA": {
+        "title": "New Phone",
+        "subtitle": "Upgrading yearly",
+        "image": "images/q12-a.png",
+        "co2": "60.0 kg CO₂",
+        "description": "Manufacturing electronics requires rare earth mining."
+      },
+      "optionB": {
+        "title": "Keep 4 Years",
+        "subtitle": "Same phone",
+        "image": "images/q12-b.png",
+        "co2": "15.0 kg CO₂",
+        "description": "Spreads the manufacturing footprint over more years."
+      },
+      "correct": "A",
+      "fact": "Manufacturing electronics creates significant upfront emissions."
+    },
+    {
+      "id": 13,
+      "question": "Which emits more CO₂?",
+      "subtitle": "Drinking Water",
+      "optionA": {
+        "title": "Bottled Water",
+        "subtitle": "Daily plastic",
+        "image": "images/q13-a.png",
+        "co2": "0.5 kg CO₂",
+        "description": "Manufacturing and transporting plastic."
+      },
+      "optionB": {
+        "title": "Reusable Bottle",
+        "subtitle": "Steel/Glass",
+        "image": "images/q13-b.png",
+        "co2": "0.01 kg CO₂",
+        "description": "One-time manufacturing cost."
+      },
+      "correct": "A",
+      "fact": "Single-use plastics require manufacturing, transport, and disposal."
+    },
+    {
+      "id": 14,
+      "question": "Which emits more CO₂?",
+      "subtitle": "Digital Habits",
+      "optionA": {
+        "title": "4K Streaming",
+        "subtitle": "All day",
+        "image": "images/q14-a.png",
+        "co2": "1.8 kg CO₂",
+        "description": "High data transfer requires massive data centers."
+      },
+      "optionB": {
+        "title": "Reading",
+        "subtitle": "Downloaded content",
+        "image": "images/q14-b.png",
+        "co2": "0.1 kg CO₂",
+        "description": "Low device power and no active data streaming."
+      },
+      "correct": "A",
+      "fact": "Data centers and high-bandwidth streaming consume massive energy."
+    },
+    {
+      "id": 15,
+      "question": "Which emits more CO₂?",
+      "subtitle": "Data Storage",
+      "optionA": {
+        "title": "Hoarding Files",
+        "subtitle": "Thousands unused",
+        "image": "images/q15-a.png",
+        "co2": "2.5 kg CO₂",
+        "description": "Cloud servers run 24/7 to store your data."
+      },
+      "optionB": {
+        "title": "Digital Cleanup",
+        "subtitle": "Deleting old files",
+        "image": "images/q15-b.png",
+        "co2": "0.0 kg CO₂ saved",
+        "description": "Frees up server space and reduces power needs."
+      },
+      "correct": "A",
+      "fact": "Cloud storage requires continuous data center resources."
+    }
+  ],
+  "config": {
+    "numberOfQuestions": 10,
+    "randomiseQuestions": true,
+    "randomiseOptions": true
+  }
+}

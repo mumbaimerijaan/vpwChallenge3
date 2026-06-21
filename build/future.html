@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Your Better Future</title>
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#8070FF">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/story.css">
+    <link rel="stylesheet" href="css/future.css">
+</head>
+<body>
+    <main class="app-wrapper future-mode">
+        <header class="top-nav future-nav">
+            <div style="width: 100px;"></div> <!-- Placeholder to balance flex -->
+            <div class="main-title">
+                <h1>Your Better Future <span class="footprint">👣</span></h1>
+                <p id="main-subtitle">Small changes today. Massive impact tomorrow.</p>
+            </div>
+            <button class="nav-btn glass btn-share"><span class="icon">🔗</span> Share</button>
+        </header>
+
+        <section class="future-hero-section">
+            <div class="hero-bg-img"></div>
+            <div class="hero-image-container">
+                <!-- Center Divider -->
+                <div class="center-divider">
+                    <div class="glow-line"></div>
+                    <div class="center-circle">
+                        <span class="footprint green-footprint">👣</span>
+                    </div>
+                </div>
+
+                <!-- Left Panel Overlay -->
+                <div class="hero-overlay-left">
+                    <div class="hero-text-block">
+                        <div class="path-pill dark-pill">Current Path</div>
+                        <div class="path-text text-dark-shadow text-center">
+                            Higher emissions,<br>heavier tomorrow.
+                        </div>
+                    </div>
+                    <div class="impact-score-card glass-pane">
+                        <small>Impact Score</small>
+                        <div class="score-val warning-text">78</div>
+                        <div class="score-label warning-bg">High Impact</div>
+                    </div>
+                </div>
+
+                <!-- Right Panel Overlay -->
+                <div class="hero-overlay-right">
+                    <div class="hero-text-block">
+                        <div class="path-pill green-pill">Better Path</div>
+                        <div class="path-text text-light-shadow text-center">
+                            Smarter choices,<br>brighter tomorrow.
+                        </div>
+                    </div>
+                    <div class="impact-score-card glass-pane">
+                        <small>Impact Score</small>
+                        <div class="score-val success-text">51</div>
+                        <div class="score-label success-bg">Lower Impact</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="future-cards-section glass-pane">
+            <div class="section-header text-center">
+                <h2>Simple actions. <span class="purple-text">Big difference.</span></h2>
+            </div>
+            <div class="action-cards-row">
+                <div class="action-card glass-inner hover-float">
+                    <div class="action-icon-box bg-purple-light">
+                        <span class="icon text-purple">🚆</span>
+                    </div>
+                    <div class="action-content">
+                        <h3>Use Public Transport</h3>
+                        <p>Switching to public transport reduces emissions and traffic.</p>
+                    </div>
+                </div>
+                
+                <div class="action-card glass-inner hover-float">
+                    <div class="action-icon-box bg-orange-light">
+                        <span class="icon text-orange">💡</span>
+                    </div>
+                    <div class="action-content">
+                        <h3>Switch to LED Bulbs</h3>
+                        <p>LED bulbs use up to 80% less electricity than regular bulbs.</p>
+                    </div>
+                </div>
+
+                <div class="action-card glass-inner hover-float">
+                    <div class="action-icon-box bg-green-light">
+                        <span class="icon text-green">🥗</span>
+                    </div>
+                    <div class="action-content">
+                        <h3>Choose Plant-Based Meals</h3>
+                        <p>Plant-based meals require fewer resources and emit less greenhouse gases.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="future-bottom-section">
+            <div class="infographic-card glass-pane hover-float">
+                <div class="info-header">
+                    <span class="icon">💡</span> <h3>Did You Know?</h3>
+                </div>
+                <div class="info-comparisons">
+                    <div class="comparison-row">
+                        <div class="comp-item"><span class="large-icon">✈️</span><div class="comp-text"><strong>1 Flight</strong><br><small>(Short-Haul)</small></div></div>
+                        <div class="comp-equals">=</div>
+                        <div class="comp-item"><span class="large-icon">💡</span><div class="comp-text">Months of<br>LED Savings</div></div>
+                    </div>
+                    <div class="comparison-row">
+                        <div class="comp-item"><span class="large-icon">🥩</span><div class="comp-text"><strong class="warning-text">1</strong> Meat-heavy<br>Meal</div></div>
+                        <div class="comp-equals">=</div>
+                        <div class="comp-item"><span class="large-icon">🥗</span><div class="comp-text">Several<br>Vegetarian Meals</div></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="final-msg-card glass-pane dark-pane hover-float">
+                <div class="final-msg-content">
+                    <h3>One person cannot<br>save the planet.</h3>
+                    <h3 class="purple-text">Millions making<br>small changes can.</h3>
+                    <button id="btn-explore-again" class="btn-next btn-explore">Explore Again &rarr;</button>
+                </div>
+                <div class="final-earth-viz">
+                    <img src="images/earth-heart.png" alt="Earth" class="earth-float">
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="js/future.js"></script>
+</body>
+</html>

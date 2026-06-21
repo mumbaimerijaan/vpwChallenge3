@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Carbon Awareness Challenge</title>
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#8070FF">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <div class="background">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+        <div class="blob blob-3"></div>
+        <div class="particle p-1"></div>
+        <div class="particle p-2"></div>
+        <div class="particle p-3"></div>
+    </div>
+
+    <main class="app-container">
+        <!-- Header -->
+        <header class="top-bar">
+            <div class="progress-pill glass">
+                <span class="icon">✨</span> <span id="progress-text">Q1 of 3</span>
+            </div>
+            
+            <div class="progress-bar-container">
+                <div class="progress-track">
+                    <div class="progress-fill" id="progress-bar" style="width: 33%"></div>
+                </div>
+            </div>
+
+            <div class="score-pill glass">
+                <span class="icon">🍃</span> 
+                <div class="score-text">
+                    <small>Awareness Score</small>
+                    <div class="score-value"><span id="score-val">0</span> / <span id="score-total">3</span></div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Question Section -->
+        <section class="question-section" id="question-container">
+            <h1 class="question-title" id="question-text">Loading question...</h1>
+            <p class="question-subtitle" id="question-subtitle"></p>
+        </section>
+
+        <!-- Final Summary Section -->
+        <section class="summary-section hidden" id="summary-container">
+            <h1 class="summary-title">Challenge Complete!</h1>
+            <p class="summary-subtitle">Here is your final Carbon Awareness Score</p>
+            <div class="final-score-circle glass">
+                <span id="final-percentage">0%</span>
+                <small>Awareness</small>
+            </div>
+            <button class="btn-primary" id="btn-restart" style="margin-bottom: 1rem;">Restart Challenge ↻</button>
+            <br>
+            <button class="btn-primary" style="background: linear-gradient(135deg, #8070FF, #FF70A6);" onclick="window.parent.postMessage({ type: 'navigate', target: 'build/story.html' }, '*')">Next: Your Carbon Story &rarr;</button>
+        </section>
+
+        <!-- Cards Section -->
+        <section class="cards-section" id="cards-container">
+            <!-- Option A -->
+            <div class="card-scene" id="scene-a" data-option="A">
+                <div class="card glass-card" id="card-a">
+                    <div class="card-face card-front">
+                        <div class="card-image-wrap">
+                            <img src="" alt="Option A" id="img-a">
+                        </div>
+                        <div class="card-content">
+                            <h2 class="card-title">A. <span id="title-a">Option A</span></h2>
+                            <p class="card-subtitle" id="sub-a">Subtitle</p>
+                        </div>
+                    </div>
+                    <div class="card-face card-back">
+                        <div class="selection-status">
+                            <div class="status-icon sel" id="status-icon-a">🚗</div>
+                            <span class="status-text" id="status-text-a">You selected</span>
+                        </div>
+                        <h2 class="card-title">A. <span id="back-title-a">Option A</span></h2>
+                        <p class="card-subtitle" id="back-sub-a">Subtitle</p>
+                        <div class="result-details hidden" id="result-a">
+                            <h3 class="co2-value" id="co2-a">0 kg CO₂</h3>
+                            <div class="cloud-indicator" id="cloud-a"></div>
+                            <p class="co2-desc" id="desc-a">Description</p>
+                        </div>
+                        <div class="confirm-action" id="confirm-wrap-a">
+                            <p>Are you sure?</p>
+                            <button class="btn-confirm">Confirm</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- VS Badge -->
+            <div class="vs-badge glass" id="vs-badge">VS</div>
+
+            <!-- Center Result Panel -->
+            <div class="center-result-panel glass hidden" id="center-result">
+                <div class="result-icon"><span id="center-icon">🍃</span></div>
+                <h2 class="result-heading" id="center-heading">Not Quite!</h2>
+                <p class="result-fact" id="center-fact">Fact goes here.</p>
+            </div>
+
+            <!-- Option B -->
+            <div class="card-scene" id="scene-b" data-option="B">
+                <div class="card glass-card" id="card-b">
+                    <div class="card-face card-front">
+                        <div class="card-image-wrap">
+                            <img src="" alt="Option B" id="img-b">
+                        </div>
+                        <div class="card-content">
+                            <h2 class="card-title">B. <span id="title-b">Option B</span></h2>
+                            <p class="card-subtitle" id="sub-b">Subtitle</p>
+                        </div>
+                    </div>
+                    <div class="card-face card-back">
+                        <div class="selection-status">
+                            <div class="status-icon sel" id="status-icon-b">🚆</div>
+                            <span class="status-text" id="status-text-b">You selected</span>
+                        </div>
+                        <h2 class="card-title">B. <span id="back-title-b">Option B</span></h2>
+                        <p class="card-subtitle" id="back-sub-b">Subtitle</p>
+                        <div class="result-details hidden" id="result-b">
+                            <h3 class="co2-value" id="co2-b">0 kg CO₂</h3>
+                            <div class="cloud-indicator" id="cloud-b"></div>
+                            <p class="co2-desc" id="desc-b">Description</p>
+                        </div>
+                        <div class="confirm-action" id="confirm-wrap-b">
+                            <p>Are you sure?</p>
+                            <button class="btn-confirm">Confirm</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="footer-actions">
+            <p class="lock-text" id="lock-text"><span class="icon">🔒</span> Confirm your choice to see the results</p>
+            <button class="btn-next hidden" id="btn-next">Next Question →</button>
+        </footer>
+    </main>
+
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="js/quiz.js"></script>
+    <script src="js/ui.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>

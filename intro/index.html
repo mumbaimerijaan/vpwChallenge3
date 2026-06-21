@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carbon Timeline Intro</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;800&family=Outfit:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    
+    <!-- GSAP and jQuery -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+</head>
+<body>
+
+    <!-- Main Container -->
+    <main id="intro-container">
+
+        <!-- Video Backgrounds Layer -->
+        <div id="video-layer">
+            <div class="video-container active" data-scene="0">
+                <img src="images/initial-background.png" alt="Initial Background" class="bg-img">
+            </div>
+            <div class="video-container" data-scene="1">
+                <video src="videos/1850_Living Planet.mp4" muted playsinline preload="auto"></video>
+            </div>
+            <div class="video-container" data-scene="2">
+                <video src="videos/1900_Steam_Coal.mp4" muted playsinline preload="auto"></video>
+            </div>
+            <div class="video-container" data-scene="3">
+                <video src="videos/1950_Machine_Age.mp4" muted playsinline preload="auto"></video>
+            </div>
+            <div class="video-container" data-scene="4">
+                <video src="videos/2000_Connected_World.mp4" muted playsinline preload="auto"></video>
+            </div>
+            <div class="video-container" data-scene="5">
+                <video src="videos/2025_Consumption_Era.mp4" muted playsinline preload="auto"></video>
+            </div>
+            <div class="video-container" data-scene="6">
+                <video src="videos/The_Choice.mp4" muted playsinline preload="auto"></video>
+            </div>
+        </div>
+
+        <!-- UI Overlay Layer -->
+        <div id="ui-layer">
+
+            <!-- Opening Scene -->
+            <div class="scene-content active" id="scene-0">
+                <div class="opening-text">
+                    <h1>
+                        <span class="line-1">READY TO SEE</span>
+                        <span class="line-2">THE IMPACT OF CARBON</span>
+                        <span class="line-3 gradient-text">ON YOUR UNIVERSE?</span>
+                    </h1>
+                    <div class="glow-separator">
+                        <div class="glow-line-left"></div>
+                        <div class="glow-dot"></div>
+                        <div class="glow-line-right"></div>
+                    </div>
+                    <p>Journey through time.<br>See how our choices shaped the world we live in today.</p>
+                </div>
+            </div>
+
+            <!-- Global Top Left Year -->
+            <div id="year-counter" style="opacity: 0;">
+                <span id="year-display">0000</span>
+            </div>
+
+            <!-- Scene Text Elements -->
+            <div class="scene-text-container">
+                <!-- Scenes 1-6 will dynamically fade text here -->
+                <div class="scene-text" id="text-scene-1">
+                    <h2>LIVING PLANET</h2>
+                    <p>Forests, rivers and oceans sustained a delicate balance. Human impact existed, but nature still dominated the planet.</p>
+                </div>
+                <div class="scene-text" id="text-scene-2">
+                    <h2>STEAM & COAL</h2>
+                    <p>Industrialization accelerated growth, powered by coal and steam. Cities expanded and emissions began to rise.</p>
+                </div>
+                <div class="scene-text" id="text-scene-3">
+                    <h2>MACHINE AGE</h2>
+                    <p>Factories, automobiles and mass production transformed daily life, increasing energy demand across the world.</p>
+                </div>
+                <div class="scene-text" id="text-scene-4">
+                    <h2>CONNECTED WORLD</h2>
+                    <p>Global trade, digital networks and rapid transportation connected billions, bringing convenience and higher consumption.</p>
+                </div>
+                <div class="scene-text" id="text-scene-5">
+                    <h2>THE CONSUMPTION ERA</h2>
+                    <p>Instant delivery, constant connectivity and growing demand place unprecedented pressure on the planet.</p>
+                </div>
+                <div class="scene-text" id="text-scene-6">
+                    <h2>THE CHOICE</h2>
+                    <p>The future is not fixed. The choices we make today determine the world we leave behind tomorrow.</p>
+                </div>
+            </div>
+
+            <!-- Final CTA (Hidden until end) -->
+            <div id="final-cta" style="opacity: 0; pointer-events: none;">
+                <h2>The Future Is Not Fixed</h2>
+                <p>Small choices today.<br>Massive impact tomorrow.</p>
+                <button id="btn-begin">BEGIN YOUR JOURNEY</button>
+            </div>
+
+            <!-- Scroll Prompt -->
+            <div id="scroll-prompt">
+                <img src="images/mouse.png" alt="Scroll icon" class="mouse-icon">
+                <span class="scroll-text">SCROLL DOWN</span>
+            </div>
+
+        </div>
+
+    </main>
+
+    <script src="js/main.js"></script>
+</body>
+</html>

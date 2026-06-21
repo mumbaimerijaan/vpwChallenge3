@@ -1,0 +1,179 @@
+// intro/js/main.js
+
+$(document).ready(function() {
+    
+    // ----- State & Data ----- //
+    let currentScene = 0;
+    const totalScenes = 6;
+    let isTransitioning = false;
+    let isVideoPlaying = false;
+
+    // Timeline years map
+    const years = {
+        0: 0,
+        1: 1850,
+        2: 1900,
+        3: 1950,
+        4: 2000,
+        5: 2025
+    };
+
+    // ----- Elements ----- //
+    const $scrollPrompt = $('#scroll-prompt');
+    const $yearCounter = $('#year-counter');
+    const $yearDisplay = $('#year-display');
+    const $finalCta = $('#final-cta');
+
+    // Hide scroll prompt initially to allow user to read opening text
+    // Actually, prompt says: "Bottom center: Use: images/mouse.png... Mouse icon gently bounces."
+    // So we show it on Scene 0.
+
+    // ----- Scroll/Swipe Detection ----- //
+    let touchStartY = 0;
+
+    window.addEventListener('wheel', handleScroll, { passive: false });
+    window.addEventListener('touchstart', (e) => { touchStartY = e.touches[0].clientY; }, { passive: false });
+    window.addEventListener('touchmove', (e) => { e.preventDefault(); }, { passive: false }); // Prevent native scroll
+    window.addEventListener('touchend', (e) => {
+        const touchEndY = e.changedTouches[0].clientY;
+        if (touchStartY - touchEndY > 50) {
+            // Swiped up (scrolling down)
+            triggerNextScene();
+        }
+    }, { passive: false });
+
+    function handleScroll(e) {
+        e.preventDefault(); // Prevent native scroll
+        if (e.deltaY > 0) {
+            triggerNextScene();
+        }
+    }
+
+    // ----- Core Logic ----- //
+    function triggerNextScene() {
+        // Only allow advancement if not transitioning, video is not playing (or we are on scene 0), and not at end
+        if (isTransitioning || isVideoPlaying || currentScene >= totalScenes) return;
+
+        advanceToScene(currentScene + 1);
+    }
+
+    function advanceToScene(nextScene) {
+        isTransitioning = true;
+        $scrollPrompt.css('opacity', '0'); // Hide scroll prompt during transition
+
+        const prevScene = currentScene; // Capture the current scene before it gets updated
+        const $currentBg = $(`.video-container[data-scene="${prevScene}"]`);
+        const $nextBg = $(`.video-container[data-scene="${nextScene}"]`);
+        
+        const $currentText = prevScene === 0 ? $('#scene-0') : $(`#text-scene-${prevScene}`);
+        const $nextText = $(`#text-scene-${nextScene}`);
+
+        // 1. Fade out current text
+        gsap.to($currentText, {
+            opacity: 0,
+            y: -20,
+            duration: 0.6,
+            onComplete: () => {
+                
+                // 2. Crossfade Backgrounds
+                gsap.to($currentBg, { opacity: 0, duration: 1.5 });
+                gsap.to($nextBg, { opacity: 1, duration: 1.5 });
+
+                // 3. Handle Year Counter
+                if (prevScene === 0 && nextScene === 1) {
+                    // Initial fade in of year counter
+                    gsap.to($yearCounter, { opacity: 1, duration: 0.5 });
+                    animateYear(0, years[1], 1.5);
+                } else if (nextScene >= 1 && nextScene <= 5) {
+                    // Roll from previous year to next year
+                    animateYear(years[prevScene], years[nextScene], 1.5);
+                } else if (nextScene === 6) {
+                    // Fade out year counter for the final choice scene
+                    gsap.to($yearCounter, { opacity: 0, duration: 1.0 });
+                }
+
+                // Wait for crossfade to almost finish before showing next text
+                setTimeout(() => {
+                    // Reset transform before animating in
+                    gsap.set($nextText, { opacity: 0, y: 40 });
+                    
+                    // 4. Animate in next text
+                    gsap.to($nextText, {
+                        opacity: 1,
+                        y: 0,
+                        duration: 1.0,
+                        onComplete: () => {
+                            // 5. Play Video & Lock
+                            playSceneVideo(nextScene);
+                        }
+                    });
+
+                }, 1000); // 1s into the 1.5s crossfade
+            }
+        });
+
+        currentScene = nextScene;
+    }
+
+    // ----- Year Animation Logic ----- //
+    function animateYear(startYear, endYear, duration) {
+        $({ val: startYear }).animate({ val: endYear }, {
+            duration: duration * 1000,
+            step: function(now) {
+                $yearDisplay.text(Math.round(now).toString().padStart(4, '0'));
+            },
+            complete: function() {
+                $yearDisplay.text(Math.round(endYear).toString().padStart(4, '0'));
+            }
+        });
+    }
+
+    // ----- Video Playback Logic ----- //
+    function playSceneVideo(sceneIndex) {
+        const $container = $(`.video-container[data-scene="${sceneIndex}"]`);
+        const video = $container.find('video')[0];
+
+        if (video) {
+            isVideoPlaying = true;
+            isTransitioning = false; // Transition is over, now we wait for video
+
+            // Ensure video plays from beginning
+            video.currentTime = 0;
+            video.play().catch(err => console.log("Video play error:", err));
+
+            // Listen for end
+            video.onended = () => {
+                isVideoPlaying = false;
+                
+                if (sceneIndex < totalScenes) {
+                    // Show scroll prompt to advance
+                    gsap.to($scrollPrompt, { opacity: 1, duration: 0.5 });
+                } else {
+                    // Final Scene (6) - Show CTA
+                    showFinalCTA();
+                }
+            };
+        } else {
+            // Failsafe if no video exists
+            isTransitioning = false;
+            gsap.to($scrollPrompt, { opacity: 1, duration: 0.5 });
+        }
+    }
+
+    function showFinalCTA() {
+        // Fade out scene 6 text
+        gsap.to($('#text-scene-6'), { opacity: 0, y: -20, duration: 0.8 });
+        
+        // Fade in CTA
+        gsap.to($finalCta, { opacity: 1, duration: 1.5, pointerEvents: 'auto', delay: 0.5 });
+        
+        // Hide scroll prompt permanently
+        $scrollPrompt.hide();
+    }
+
+    // ----- CTA Action ----- //
+    $('#btn-begin').on('click', function() {
+        window.parent.postMessage({ type: "navigate", target: "quiz/index.html" }, "*");
+    });
+
+});
